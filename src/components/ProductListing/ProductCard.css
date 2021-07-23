@@ -1,0 +1,125 @@
+@import url('/src/index.css');
+
+.product-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 475px;
+    width: 300px;
+    border: 2px solid var(--primary-color);
+    border-radius: 7px;
+    padding: 0.3rem;
+    margin: 50px auto 0px auto;
+    box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.30);
+}
+
+.out-of-stock-card::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(250, 250, 250, 60%);
+    border-radius: 7px;
+}
+
+
+.product-card div{
+    width: 100%;
+}
+
+.product-card img {
+    height: 300px;
+    width: 100%;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.best-seller-tag{
+    position: absolute;
+    top: 2%;
+    left: 3%;
+    background-color: #10B981;
+    color: white;
+    padding: 0rem 0.4rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.productInfo{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: ". ."
+    "price price";
+    grid-gap: 5px;
+}
+
+.productName{
+    font-size: 1.2rem;
+    margin-top: 15px;
+    padding-left: 10px;
+    display: block;
+}
+
+.productType{
+    color: gray;
+    padding-left: 10px;
+    display: block;
+}
+
+.productRating{
+    margin:auto;
+    font-size: 1.1rem;
+}
+
+.productPrice{
+    grid-area: price;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0px auto;
+}
+
+.addToCartBtn{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 7px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s;
+}
+
+.addToCartBtn:hover{
+    transform: translateY(-4px);
+}
+
+.addToCartBtn:active{
+    transform: translateY(0px);
+}
+
+.product-card div:last-of-type{
+    margin-top: auto;
+}
+
+.wishlistBtn{
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    color: var(--primary-color);
+    background:transparent;
+    border: none;
+    font-size: 1.4rem;
+    transition: 0.2s;
+}
+
+.wishlistBtn:active{
+    transform: scale(1.4);
+}
+
+
+
+
+
+

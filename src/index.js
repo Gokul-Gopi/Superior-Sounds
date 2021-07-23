@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ProductProvider } from './Context/ProductContext'
+import { AuthProvider } from './Context/AuthContext'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { StrictMode } from 'react';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <AuthProvider>
+      <ProductProvider>
+        <Router>
+          <App />
+        </Router>
+      </ProductProvider>
+    </AuthProvider>
+  </StrictMode>
+  ,
   document.getElementById('root')
 );
 

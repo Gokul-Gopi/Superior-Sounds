@@ -1,0 +1,133 @@
+@import url('/src/index.css');
+
+.navibar{
+    display: flex;
+    align-items: center;
+    padding: 1.2rem;
+    box-shadow: 4px 7px 8px -8px rgba(0, 0, 0, 0.33);
+}
+
+.header_main{
+    display: flex;
+    margin-left: 2rem;
+}
+
+.header_logo img{
+    height:60px;
+    width: 60px;
+}
+
+.header_headings{
+    color: var(--primary-color);
+    margin-left:10px;
+}
+
+
+.link-to-home:hover{
+    text-decoration: none;
+}
+
+.primary-heading{
+    font-size: 2.1rem;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.secondary-heading{
+    font-size: 0.8rem;
+    letter-spacing: 22.5px;
+    margin: 0px;
+    font-weight: 600;
+
+}
+
+.header_search{
+    width: 60%;
+}
+
+.header_search input{
+    display: block;
+    height: 40px;
+    margin-left: auto;
+    padding: 0.8rem;
+    width: 450px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 4px 7px 8px -8px rgba(0, 0, 0, 0.23);
+    background-color: #F4F4F5;
+    font-size: 0.9rem;
+}
+
+.header_search input:focus{
+    outline: none;
+}
+
+.header_options{
+    display: flex;
+    position: relative;
+    justify-content: space-evenly;
+    margin-left: 2rem;
+    width: 235px;
+}
+
+.header_options button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.header_options i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.cart-length{
+    position: absolute;
+    top: 70%;
+    left: 25%;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    font-size: 0.9rem;
+}
+
+.userLogoBtn{
+    position: relative;
+    font-weight: 600;
+    line-height: normal;
+    transform: scale(1.5);  
+}
+
+.tooltiptext{
+    position: absolute;
+    top: 120%;
+    right: -75%;
+    visibility: hidden;
+    font-weight: 200;
+    font-size: 11px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.2rem;
+    text-align: center;
+    border-radius: 6px;
+    transition: 0.1s;
+}
+
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent var(--primary-color) transparent;
+}
+
+.userLogoBtn:hover .tooltiptext {
+    visibility: visible;
+}

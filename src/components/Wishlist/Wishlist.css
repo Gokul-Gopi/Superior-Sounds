@@ -1,0 +1,17 @@
+.empty-wishlist{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #DDD6FE;
+    height: 70vh;
+}
+
+.empty-wishlist i{
+    font-size: 17rem;
+    margin-bottom: 20px;
+}
+
+.empty-wishlist span{
+    font-size: 2rem; 
+}
