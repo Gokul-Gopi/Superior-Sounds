@@ -4,6 +4,7 @@ import { useProduct } from '../../Context/ProductContext'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../Context/AuthContext'
 import { addToCart } from "../../Utils/NetworkCalls";
+import { FaAward } from 'react-icons/fa'
 
 
 const ProductCard = (props) => {
@@ -35,7 +36,7 @@ const ProductCard = (props) => {
 
     return (
         <div className={props.inStock ? 'product-card' : 'product-card out-of-stock-card'}>
-            {props.bestSeller && <span className='best-seller-tag'>Best Seller</span>}
+            {props.bestSeller && <FaAward className='best-seller-tag' />}
             <Link to={`/products/${props.id}`}>
                 <div>
                     <img src={props.img} alt="ProductImage" />
@@ -44,11 +45,12 @@ const ProductCard = (props) => {
             <div className='productInfo'>
                 <div>
                     <span className='productName'>{props.name}</span>
-                    <span className='productType'>{props.type}</span>
+                    {/* <span className='productType'>{props.type}</span> */}
                 </div>
-
-                <span className='productRating'><i class="far fa-star"></i>{props.ratings}</span>
-                <span className='productPrice'>₹ {props.price}</span>
+                <div>
+                    <span className='productRating'><i class="far fa-star"></i>{props.ratings}</span>
+                    <span className='productPrice'>Rs. {props.price}</span>
+                </div>
             </div>
 
             <div>

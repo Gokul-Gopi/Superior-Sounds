@@ -4,13 +4,14 @@ import { RiCloseFill } from 'react-icons/ri'
 import { AiFillEyeInvisible } from 'react-icons/ai'
 import { AiFillEye } from 'react-icons/ai'
 import axios from 'axios'
-import { useAuth } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { useModal } from '../../Context/ModalContext'
 
 
-const SignUp = ({ toggle, displayValue }) => {
+const SignUp = () => {
 
     const navigate = useNavigate()
+    const { modalState, modalDispatch } = useModal()
 
     const [userDetails, setuserDetails] = useState({
         firstName: '',
@@ -44,7 +45,7 @@ const SignUp = ({ toggle, displayValue }) => {
             setformErrors(preValue => ({ ...preValue, eMail: '' }))
         }
 
-        if (pwdValidator.test(pwd) === false && pwd.length >= 8) {
+        if (!pwdValidator.test(pwd)) {
             setformErrors(preValue => ({ ...preValue, pwd: 'Minimum 8 characters long and must contain a number' }))
             validator = false
         }
@@ -66,15 +67,12 @@ const SignUp = ({ toggle, displayValue }) => {
 
     const signUpHandler = async (event) => {
         event.preventDefault()
+        console.log(validateForm());
         if (validateForm()) {
-            // setuserDetails(() => ({ firstName: '', lastName: '', eMail: '', pwd: '', confirmPwd: '' }))
-            // setformErrors(() => ({ eMail: '', pwd: '', confirmPwd: '' }))
-            toggle('none')
-            navigate('/')
-
             try {
                 const { data: { token, name } } = await axios.post('/user/signup', userDetails)
                 localStorage.setItem('userDetails', JSON.stringify({ name, token }))
+                window.location.reload();
             } catch (err) {
                 console.log(`Error: ${err.message}`)
             }
@@ -82,7 +80,7 @@ const SignUp = ({ toggle, displayValue }) => {
     }
 
     return (
-        <div className='signup' style={{ display: displayValue }} onClick={() => toggle('none')}>
+        <div className='signup' style={{ display: modalState.signUp ? 'block' : 'none' }} onClick={() => modalDispatch({ type: 'SIGN_UP' })}>
             <div className='signup-container' onClick={(e) => e.stopPropagation()}>
 
                 <div className='signup_side-image'>
@@ -92,7 +90,7 @@ const SignUp = ({ toggle, displayValue }) => {
                     </div>
                 </div>
                 <form className='signup-form'>
-                    <RiCloseFill className='close-form-icon' onClick={() => toggle('none')} />
+                    <RiCloseFill className='close-form-icon' onClick={() => modalDispatch({ type: 'SIGN_UP' })} />
 
                     <div>
                         <label htmlFor="">First Name</label>

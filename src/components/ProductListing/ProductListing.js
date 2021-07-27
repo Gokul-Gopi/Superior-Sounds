@@ -5,28 +5,30 @@ import FilterProducts from './FilterProducts'
 import { useProduct } from '../../Context/ProductContext'
 import { sortByPrice, otherFilters } from '../../../src/array-manipulation'
 import axios from 'axios'
+import { networkCall } from "../../Utils/NetworkCalls";
 
 const ProductListing = () => {
 
     const { state, dispatch } = useProduct()
 
     useEffect(() => {
-        // dispatch({ type: 'SET_LOADING', payload: true })
+        window.scrollTo(0, 0)
+        dispatch({ type: 'SET_LOADING' })
         const fetchProducts = async () => {
             try {
-                let { data } = await axios.get('/products');
+                const { data } = await networkCall('/products', 'GET');
                 dispatch({ type: 'SET_PRODUCTS', payload: data })
             } catch (err) {
                 console.log(`Error: ${err.message}`);
             }
         }
-
         fetchProducts();
+        dispatch({ type: 'SET_LOADING' })
 
     }, [])
 
-    let filteredProducts = otherFilters(state.otherFilters, state.allProducts)
-    let sortedProducts = sortByPrice(state.sortByPrice, filteredProducts)
+    const filteredProducts = otherFilters(state.otherFilters, state.allProducts)
+    const sortedProducts = sortByPrice(state.sortByPrice, filteredProducts)
 
 
     return (

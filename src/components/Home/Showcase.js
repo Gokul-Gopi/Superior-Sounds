@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import './Showcase.css'
 import { Link } from "react-router-dom";
 import { useAuth } from '../../Context/AuthContext';
+import { useModal } from '../../Context/ModalContext';
 
 
-const Showcase = ({ toggle }) => {
+const Showcase = () => {
 
-    const { authState, authDispatch } = useAuth();
+    const { authState } = useAuth();
+    const { modalDispatch } = useModal()
+
 
     return (
         <div className='showcase-products'>
@@ -16,11 +19,11 @@ const Showcase = ({ toggle }) => {
 
                 {authState.isLoggedIn ?
                     <span>Welcome {authState.currentUserName}!</span> :
-                    <button className='login-btn' onClick={() => toggle('Block')}>Sign up</button>
+                    <button className='login-btn' onClick={() => modalDispatch({ type: "SIGN_UP" })}>Sign up</button>
                 }
 
                 <Link to='/products'>
-                    <button className='browse-btn'>Store</button>
+                    <button className='browse-btn' >Store</button>
                 </Link>
 
 

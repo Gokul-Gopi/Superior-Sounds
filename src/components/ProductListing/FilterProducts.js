@@ -23,7 +23,6 @@ const FilterProducts = () => {
 
     return (
         <aside className='filter-products'>
-            {/* <h2>FILTERS</h2> */}
 
             <div className="filter-products_type">
                 <span>Sort by price</span>

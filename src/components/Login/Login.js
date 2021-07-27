@@ -5,14 +5,13 @@ import '../Login/Login.css'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
-
-// gokulg9090@gmail.com
+import { useModal } from '../../Context/ModalContext'
 
 
 const Login = () => {
 
-    const { authState, authDispatch } = useAuth();
+    const { authDispatch } = useAuth();
+    const { modalState, modalDispatch } = useModal()
     const navigate = useNavigate()
 
     const [credentials, setCredentials] = useState({
@@ -24,16 +23,18 @@ const Login = () => {
 
     const loginHandler = async (event) => {
         event.preventDefault();
+
         try {
-            // dispatch({ type: 'SET_LOADING', payload: true })
             let { data } = await axios.post('/user/login', credentials);
             if (data.success) {
-                const user = data.user
-                authDispatch({ type: "SET_USER", payload: user.name })
+                const user = data.user;
+                authDispatch({ type: "SET_USER", payload: user.name });
+                authDispatch({ type: "SET_USER_TOKEN", payload: user.token });
                 localStorage.setItem('userDetails', JSON.stringify({
                     name: user.name,
                     token: user.token,
                 }))
+                modalDispatch({ type: 'LOGIN' })
                 navigate('/')
             }
             else {
@@ -46,15 +47,14 @@ const Login = () => {
         } catch (err) {
             console.log(`Error: ${err.message}`);
         }
-        // dispatch({ type: 'SET_LOADING', payload: false })
 
     }
 
     return (
-        <div className='login'>
+        <div className='login' style={{ display: modalState.login ? 'block' : 'none' }} onClick={() => modalDispatch({ type: 'LOGIN' })}>
 
-            <div><span style={{ color: 'red' }}>{errorMessage}</span></div>
-            <div className="login-container">
+            <div className="login-container" onClick={(e) => e.stopPropagation()} >
+                <div><span style={{ color: 'red' }}>{errorMessage}</span></div>
                 <form onSubmit={(e) => loginHandler(e)}>
                     <div>
                         <label htmlFor="name">E-mail</label>
@@ -70,11 +70,16 @@ const Login = () => {
                         <button>Login</button>
                     </div>
                 </form>
+                <div className='create-account-link'>
+                    <span>Dont have an account? &nbsp; <strong onClick={() => {
+                        modalDispatch({ type: 'LOGIN' })
+                        modalDispatch({ type: 'SIGN_UP' })
+                    }}
+                    >Sign Up</strong></span>
+                </div>
             </div>
 
-            <div className='create-account-link'>
-                <span>Dont have an account? &nbsp; <strong>Sign Up</strong></span>
-            </div>
+
         </div>
     )
 }

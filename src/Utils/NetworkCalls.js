@@ -63,16 +63,18 @@ const defaultHeaderForToken = (token) => {
 }
 
 const getUserCart = async (dispatch) => {
-
+    dispatch({ type: 'SET_LOADING' })
     try {
         const { data } = await networkCall('/cart', 'GET')
         dispatch({ type: 'SET_CART', payload: data.userCart })
     } catch (err) {
         console.log(`Error: ${err.message}`);
     }
+    dispatch({ type: 'SET_LOADING' })
 }
 
 const addToCart = async (event, productID, dispatch) => {
+    dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
     try {
         const { data } = await networkCall(`/cart/${productID}`, 'POST')
@@ -84,21 +86,27 @@ const addToCart = async (event, productID, dispatch) => {
     } catch (err) {
         console.log(`Error: ${err.message}`)
     }
+    dispatch({ type: 'SET_LOADING' })
 }
 
 const modifyCartItemsQty = async (event, type, productID, dispatch) => {
+    dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
     const { data } = await networkCall(`/cart/${productID}`, 'PUT', type)
     dispatch({ type: 'SET_CART', payload: data.userCart })
+    dispatch({ type: 'SET_LOADING' })
 }
 
 const removeItemFromCart = async (event, productID, dispatch) => {
+    dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
     const { data } = await networkCall(`/cart/${productID}`, 'DELETE')
     dispatch({ type: 'SET_CART', payload: data.userCart })
+    dispatch({ type: 'SET_LOADING' })
 }
 
 const addToWishlist = async (event, productID, dispatch) => {
+    dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
     const { data } = await networkCall(`/wishlist/${productID}`, 'POST')
     console.log(data)
@@ -107,6 +115,7 @@ const addToWishlist = async (event, productID, dispatch) => {
     } else {
         console.log(data.message)
     }
+    dispatch({ type: 'SET_LOADING' })
 }
 
 

@@ -5,18 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ProductProvider } from './Context/ProductContext'
 import { AuthProvider } from './Context/AuthContext'
+import { ModalProvider } from './Context/ModalContext'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { StrictMode } from 'react';
 
 ReactDOM.render(
   <StrictMode>
-    <AuthProvider>
-      <ProductProvider>
-        <Router>
-          <App />
-        </Router>
-      </ProductProvider>
-    </AuthProvider>
+    <ModalProvider>
+      <AuthProvider>
+        <ProductProvider>
+          <Router>
+            <App />
+          </Router>
+        </ProductProvider>
+      </AuthProvider>
+    </ModalProvider>
   </StrictMode>
   ,
   document.getElementById('root')

@@ -3,20 +3,26 @@ import { useParams } from 'react-router-dom'
 import { useAuth } from '../../Context/AuthContext'
 import { useProduct } from '../../Context/ProductContext'
 import '../ProductDetails/ProductDetails.css'
-import axios from 'axios'
-import { addToWishlist, addToCart } from "../../Utils/NetworkCalls";
+import { networkCall, addToWishlist, addToCart } from "../../Utils/NetworkCalls";
+import { FaAward } from 'react-icons/fa'
 
 const ProductDetails = () => {
     const { id } = useParams()
-    const { authState } = useAuth()
     const { dispatch } = useProduct()
     const [product, setProduct] = useState({})
 
     useEffect(() => {
-        (async () => {
-            const { data } = await axios.get(`/products/${id}`)
-            setProduct(data)
-        })();
+        dispatch({ type: 'SET_LOADING' })
+        const fetchProduct = async () => {
+            try {
+                const { data } = await networkCall(`/products/${id}`, 'GET')
+                setProduct(data)
+            } catch (err) {
+                console.log(`Error: ${err.message}`)
+            }
+        };
+        fetchProduct()
+        dispatch({ type: 'SET_LOADING' })
     }, [])
 
     return (
@@ -59,8 +65,6 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
-
-
 
         </div>
     )

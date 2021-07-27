@@ -6,7 +6,6 @@ const initialState = {
     currentUserName: '',
     currentUserToken: '',
     isLoggedIn: false,
-    loading: false
 }
 
 const authReducer = (state, action) => {
@@ -27,7 +26,6 @@ const AuthProvider = ({ children }) => {
         user?.name && authDispatch({ type: 'SET_USER', payload: user.name })
         user?.token && authDispatch({ type: 'SET_USER_TOKEN', payload: user.token })
     }, [])
-
 
     return (
         <AuthContext.Provider value={{ authState, authDispatch }}>

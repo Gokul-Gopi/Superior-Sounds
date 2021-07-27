@@ -4,19 +4,20 @@ import { Link } from 'react-router-dom';
 import { useProduct } from '../../Context/ProductContext'
 import { useAuth } from '../../Context/AuthContext'
 import { getUserCart } from "../../Utils/NetworkCalls";
+import { useModal } from '../../Context/ModalContext';
 
 
 const Header = () => {
 
     const { state, dispatch } = useProduct()
     const { authState } = useAuth();
+    const { modalDispatch } = useModal()
 
     const changeUserLogo = () => {
         const userName = authState.currentUserName
         const firstLetter = userName.slice(0, 1)
         return firstLetter;
     }
-
 
     return (
         <nav className='navibar'>
@@ -51,15 +52,17 @@ const Header = () => {
                     <button><i class="far fa-heart"></i></button>
                 </Link>
 
-                <Link to='/login'>
-                    {authState.isLoggedIn
-                        ? <button className='userLogoBtn'>
-                            {changeUserLogo()}
-                            <span className='tooltiptext'>{authState.currentUserName}</span>
-                        </button>
-                        : <button><i class="far fa-user"></i></button>
-                    }
-                </Link>
+
+                {authState.isLoggedIn
+                    ? <button className='userLogoBtn' onClick={() => modalDispatch({ type: 'LOGOUT' })}>
+                        {changeUserLogo()}
+                        <span className='tooltiptext'>{authState.currentUserName}</span>
+                    </button>
+                    : <button onClick={() => modalDispatch({ type: 'LOGIN' })}>
+                        <i class="far fa-user"></i>
+                    </button>
+                }
+
 
             </div>
 

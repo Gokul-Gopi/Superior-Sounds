@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useProduct } from '../../Context/ProductContext'
 import '../Cart/Cart.css'
-import { modifyCartItemsQty, removeItemFromCart } from "../../Utils/NetworkCalls";
+import { addToWishlist, modifyCartItemsQty, removeItemFromCart } from "../../Utils/NetworkCalls";
 import { calculatePriceAndSubtotal } from '../../Utils/cart'
 
 
@@ -30,7 +30,7 @@ const Cart = () => {
                                         <span>*Cash on delivery available</span>
                                         <div>
                                             <button className='remove-btn' onClick={(e) => removeItemFromCart(e, product._id, dispatch)}>Remove</button>
-                                            <button className='wishlist-btn'>Wishlist</button>
+                                            <button className='wishlist-btn' onClick={(e) => addToWishlist(e, product._id, dispatch)}>Wishlist</button>
                                         </div>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@ const Cart = () => {
                                     <div>₹ {product.price * quantity}</div>
                                     <button onClick={(e) => modifyCartItemsQty(e, { action: 'increase' }, product._id, dispatch)}>+</button>
                                     <span>{quantity}</span>
-                                    <button onClick={(e) => modifyCartItemsQty(e, { action: 'decrease' }, product._id, dispatch)} >-</button>
+                                    <button disabled={quantity === 1 && 'disabled'} onClick={(e) => modifyCartItemsQty(e, { action: 'decrease' }, product._id, dispatch)} >-</button>
                                 </div>
 
                             </div>)
