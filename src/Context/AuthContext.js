@@ -1,5 +1,4 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
-import axios from 'axios'
 import { networkCall } from "../Utils/NetworkCalls";
 
 const AuthContext = createContext();

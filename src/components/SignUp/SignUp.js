@@ -3,13 +3,11 @@ import '../SignUp/SignUp.css'
 import { RiCloseFill } from 'react-icons/ri'
 import { AiFillEyeInvisible } from 'react-icons/ai'
 import { AiFillEye } from 'react-icons/ai'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useModal } from '../../Context/ModalContext'
 import { useProduct } from '../../Context/ProductContext'
 import { useAuth } from '../../Context/AuthContext'
 import callToastify from '../../Utils/toast'
-import { networkCall } from '../../Utils/NetworkCalls'
 
 
 const SignUp = () => {

@@ -4,7 +4,6 @@ import { useAuth } from '../../Context/AuthContext'
 import { useProduct } from '../../Context/ProductContext'
 import '../ProductDetails/ProductDetails.css'
 import { networkCall, addToWishlist, addToCart } from "../../Utils/NetworkCalls";
-import { FaAward } from 'react-icons/fa'
 
 const ProductDetails = () => {
     const { id } = useParams()

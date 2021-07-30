@@ -1,5 +1,5 @@
 import {
-    addToCart, addToWishlist, removeFromWishlist, removeFromCart,
+    removeFromWishlist
 } from '../array-manipulation'
 
 const initialState = {

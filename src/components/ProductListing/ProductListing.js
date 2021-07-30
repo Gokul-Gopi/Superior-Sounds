@@ -4,7 +4,6 @@ import ProductCard from './ProductCard'
 import FilterProducts from './FilterProducts'
 import { useProduct } from '../../Context/ProductContext'
 import { sortByPrice, otherFilters } from '../../../src/array-manipulation'
-import axios from 'axios'
 import { networkCall } from "../../Utils/NetworkCalls";
 
 const ProductListing = () => {

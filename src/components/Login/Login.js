@@ -2,12 +2,11 @@ import React from 'react'
 import { useAuth } from '../../Context/AuthContext'
 import { useProduct } from '../../Context/ProductContext'
 import '../Login/Login.css'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useModal } from '../../Context/ModalContext'
 import callToastify from '../../Utils/toast'
-import { networkCall } from '../../Utils/NetworkCalls'
+
 
 
 const Login = () => {
