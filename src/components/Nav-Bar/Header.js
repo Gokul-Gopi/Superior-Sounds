@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "./Header.css";
 import { Link } from 'react-router-dom';
 import { useProduct } from '../../Context/ProductContext'
 import { useAuth } from '../../Context/AuthContext'
-import { getUserCart } from "../../Utils/NetworkCalls";
+import { getUserCart, getUserWishlist } from "../../Utils/NetworkCalls";
 import { useModal } from '../../Context/ModalContext';
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { BiHeart } from 'react-icons/bi'
+import { BiStoreAlt } from 'react-icons/bi'
+import { BiUserCircle } from 'react-icons/bi'
 
 
 const Header = () => {
-
-    const { state, dispatch } = useProduct()
+    // {state.cart.length !== 0 && <span className='cart-length'>{state.cart.length}</span>}
+    const customLinkStyling = { display: 'flex', flexDirection: 'column', textDecoration: 'none', alignItems: 'center' }
+    const { dispatch } = useProduct();
     const { authState } = useAuth();
-    const { modalDispatch } = useModal()
+    const { modalDispatch } = useModal();
 
-    const changeUserLogo = () => {
-        const userName = authState.currentUserName
-        const firstLetter = userName.slice(0, 1)
-        return firstLetter;
-    }
 
     return (
-        <nav className='navibar'>
-            <Link to='/' className='link-to-home'>
+        <nav className='navigation-bar'>
+            <Link to='/' style={{ textDecoration: 'none' }}>
                 <div className='header_main'>
                     <div className='header_logo'>
                         <img src="https://image.flaticon.com/icons/png/512/142/142437.png" alt="logo" />
@@ -41,28 +41,34 @@ const Header = () => {
             </div>
 
             <div className='header_options'>
-                <Link to='/cart'>
-                    <button onClick={() => getUserCart(dispatch)}
-                    >{state.cart.length !== 0 && <span className='cart-length'>{state.cart.length}</span>}
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
+
+                <Link to='/products' style={customLinkStyling}>
+                    <BiStoreAlt className='navbar-icon' />
+                    <span className='link-name'>Store</span>
                 </Link>
 
-                <Link to='/wishlist'>
-                    <button><i class="far fa-heart"></i></button>
+                <Link to='/cart' style={customLinkStyling}>
+                    <AiOutlineShoppingCart className='navbar-icon' onClick={() => getUserCart(dispatch)} />
+                    <span className='link-name'>Cart</span>
+                </Link>
+
+                <Link to='/wishlist' style={customLinkStyling}>
+                    <BiHeart className='navbar-icon' onClick={() => getUserWishlist(dispatch)} />
+                    <span className='link-name'>Wishlist</span>
                 </Link>
 
 
                 {authState.isLoggedIn
-                    ? <button className='userLogoBtn' onClick={() => modalDispatch({ type: 'LOGOUT' })}>
-                        {changeUserLogo()}
-                        <span className='tooltiptext'>{authState.currentUserName}</span>
-                    </button>
-                    : <button onClick={() => modalDispatch({ type: 'LOGIN' })}>
-                        <i class="far fa-user"></i>
-                    </button>
-                }
+                    ? <div style={customLinkStyling}>
+                        <BiUserCircle className='navbar-icon' onClick={() => modalDispatch({ type: 'LOGOUT' })} />
+                        <span className='link-name'>User</span>
+                    </div>
 
+                    : <div style={customLinkStyling}>
+                        <BiUserCircle className='navbar-icon' onClick={() => modalDispatch({ type: 'LOGIN' })} />
+                        <span className='link-name'>Log in</span>
+                    </div>
+                }
 
             </div>
 

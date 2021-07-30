@@ -1,21 +1,37 @@
 import React from 'react'
 import { useProduct } from '../../Context/ProductContext'
 import '../Wishlist/Wishlist.css'
+import WishlistCard from "./WishlistCard";
+import { BiHeart } from 'react-icons/bi'
 
 const Wishlist = () => {
 
     const { state } = useProduct()
 
     return (
-        state.wishlist.length ?
-            <div>
-                <h1>wishlist...</h1>
-            </div> :
 
-            <div className='empty-wishlist'>
-                <i class="fas fa-heart"></i>
-                <span>Start Wishlisting your favourites...</span>
-            </div>
+        <div className='wishlist'>
+
+            {state.wishlist.length === 0 ?
+                <>
+                    <div className='empty-wishlist'>
+                        <BiHeart className='heart-icon' />
+                        <span>Start Wishlisting...</span>
+                    </div>
+                </> :
+                <>
+                    <h4>My Wishlist <BiHeart className='heart-icon' /></h4>
+
+                    <div className='wishlist-container'>
+                        {state.wishlist.map(({ product, _id }) => {
+                            return <WishlistCard key={product._id} img={product.image} price={product.price} name={product.name} id={_id} />
+                        })}
+                    </div>
+                </>
+            }
+
+
+        </div>
     )
 }
 

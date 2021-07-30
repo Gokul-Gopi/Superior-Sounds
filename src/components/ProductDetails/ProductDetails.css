@@ -54,6 +54,11 @@
     color: white;
 }
 
+.product-page-img{
+    height: 500px;
+    width: 500px;
+}
+
 .product-page-img img{
     height: 500px;
     width: 500px;

@@ -1,4 +1,6 @@
 import axios from "axios";
+import callToastify from "./toast";
+import { Backend } from '../api'
 
 const networkCall = async (route, method, data) => {
     switch (method) {
@@ -6,7 +8,7 @@ const networkCall = async (route, method, data) => {
             try {
                 return await axios({
                     method: 'get',
-                    url: route,
+                    url: `${Backend}${route}`,
                 })
             } catch (err) {
                 console.log(`Error: ${err.message}`);
@@ -18,23 +20,23 @@ const networkCall = async (route, method, data) => {
             try {
                 return await axios({
                     method: 'post',
-                    url: route,
+                    url: `${Backend}${route}`,
+                    data: data
                 })
             } catch (err) {
-                console.log(`Error: ${err.message}`);
+                return err.response
             }
 
-            break;
 
         case 'PUT':
             try {
                 return await axios({
                     method: 'put',
                     url: route,
-                    data: data
+                    data: `${Backend}${route}`
                 })
             } catch (err) {
-                console.log(`Error: ${err.message}`);
+                return console.log(`Error: ${err.message}`);
             }
 
             break;
@@ -43,7 +45,7 @@ const networkCall = async (route, method, data) => {
             try {
                 return await axios({
                     method: 'delete',
-                    url: route,
+                    url: `${Backend}${route}`,
                 })
             } catch (err) {
                 console.log(`Error: ${err.message}`);
@@ -53,6 +55,7 @@ const networkCall = async (route, method, data) => {
 
         default:
             break;
+
     }
 }
 
@@ -73,20 +76,23 @@ const getUserCart = async (dispatch) => {
     dispatch({ type: 'SET_LOADING' })
 }
 
-const addToCart = async (event, productID, dispatch) => {
+const addToCart = async (event, productID, dispatch, isLoggedIn) => {
     dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
     try {
         const { data } = await networkCall(`/cart/${productID}`, 'POST')
+        console.log(data)
         if (data.success) {
             dispatch({ type: 'SET_CART', payload: data.response })
+            callToastify(' 🛒 Added to cart!')
         } else {
-            console.log(data.message)
+            callToastify('Already in cart !')
         }
-    } catch (err) {
-        console.log(`Error: ${err.message}`)
+    } catch {
+        isLoggedIn ? callToastify('Something went wrong ! Try Again') : callToastify('You are not logged in !')
     }
     dispatch({ type: 'SET_LOADING' })
+
 }
 
 const modifyCartItemsQty = async (event, type, productID, dispatch) => {
@@ -105,18 +111,34 @@ const removeItemFromCart = async (event, productID, dispatch) => {
     dispatch({ type: 'SET_LOADING' })
 }
 
-const addToWishlist = async (event, productID, dispatch) => {
+const addToWishlist = async (event, productID, dispatch, isLoggedIn) => {
     dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
-    const { data } = await networkCall(`/wishlist/${productID}`, 'POST')
-    console.log(data)
-    if (data.success) {
-        dispatch({ type: 'SET_WISHLIST', payload: data.response })
-    } else {
-        console.log(data.message)
+    try {
+        const { data } = await networkCall(`/wishlist/${productID}`, 'POST')
+        if (data.success) {
+            dispatch({ type: 'SET_WISHLIST', payload: data.response })
+            callToastify(' 💜 Added to wishlist')
+        } else {
+            callToastify(data.message)
+        }
+    } catch {
+        isLoggedIn ? callToastify('Something went wrong ! Try Again') : callToastify('You are not logged in !')
     }
+
     dispatch({ type: 'SET_LOADING' })
 }
 
 
-export { networkCall, defaultHeaderForToken, getUserCart, addToCart, addToWishlist, modifyCartItemsQty, removeItemFromCart }
+const getUserWishlist = async (dispatch) => {
+    dispatch({ type: 'SET_LOADING' })
+    try {
+        const { data } = await networkCall('/wishlist', 'GET')
+        dispatch({ type: 'SET_WISHLIST', payload: data.userWishlist })
+    } catch (err) {
+        console.log(`Error: ${err.message}`);
+    }
+    dispatch({ type: 'SET_LOADING' })
+}
+
+export { networkCall, defaultHeaderForToken, getUserCart, addToCart, addToWishlist, modifyCartItemsQty, removeItemFromCart, getUserWishlist }

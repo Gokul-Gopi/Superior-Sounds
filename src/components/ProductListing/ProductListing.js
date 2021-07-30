@@ -12,8 +12,8 @@ const ProductListing = () => {
     const { state, dispatch } = useProduct()
 
     useEffect(() => {
-        window.scrollTo(0, 0)
         dispatch({ type: 'SET_LOADING' })
+        window.scrollTo(0, 0)
         const fetchProducts = async () => {
             try {
                 const { data } = await networkCall('/products', 'GET');

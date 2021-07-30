@@ -1,4 +1,6 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
+import axios from 'axios'
+import { networkCall } from "../Utils/NetworkCalls";
 
 const AuthContext = createContext();
 
@@ -27,8 +29,34 @@ const AuthProvider = ({ children }) => {
         user?.token && authDispatch({ type: 'SET_USER_TOKEN', payload: user.token })
     }, [])
 
+
+    const signUpHandler = async (userDetails) => {
+        const response = await networkCall('/user/signup', 'POST', userDetails);
+        if (response.status === 201) {
+            const { name, token } = response.data;
+            localStorage.setItem('userDetails', JSON.stringify({ name, token }));
+            authDispatch({ type: "SET_USER", payload: name });
+            authDispatch({ type: "SET_USER_TOKEN", payload: token });
+        }
+        return response
+    }
+
+    const loginHandler = async (userDetails) => {
+        let response = await networkCall('/user/login', 'POST', userDetails);
+        if (response.status === 200) {
+            const user = response.data.user;
+            authDispatch({ type: "SET_USER", payload: user.name });
+            authDispatch({ type: "SET_USER_TOKEN", payload: user.token });
+            localStorage.setItem('userDetails', JSON.stringify({
+                name: user.name,
+                token: user.token,
+            }))
+        }
+        return response;
+    }
+
     return (
-        <AuthContext.Provider value={{ authState, authDispatch }}>
+        <AuthContext.Provider value={{ authState, authDispatch, signUpHandler, loginHandler }}>
             {children}
         </AuthContext.Provider>
     )

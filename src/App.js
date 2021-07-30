@@ -14,22 +14,19 @@ import Loader from './components/Loader/Loader'
 import { useProduct } from "./Context/ProductContext";
 import SignUp from "./components/SignUp/SignUp";
 import { useAuth } from "./Context/AuthContext";
-import { defaultHeaderForToken, getUserCart } from "./Utils/NetworkCalls";
+import { defaultHeaderForToken, getUserCart, getUserWishlist } from "./Utils/NetworkCalls";
 import Logout from "./components/Logout/Logout";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 function App() {
   const { state, dispatch } = useProduct()
-  const { authState, authDispatch } = useAuth()
+  const { authState } = useAuth()
   defaultHeaderForToken(authState.currentUserToken)
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage?.getItem('userDetails'))
-  //   user?.name && authDispatch({ type: 'SET_USER', payload: user.name })
-  //   user?.token && authDispatch({ type: 'SET_USER_TOKEN', payload: user.token })
-  // }, [])
-
   useEffect(() => {
-    authState.currentUserToken && getUserCart(dispatch)
+    authState.currentUserToken && getUserCart(dispatch) && getUserWishlist(dispatch)
   }, [authState.currentUserToken])
 
   return (
@@ -38,6 +35,7 @@ function App() {
 
         <Loader /> :
         <>
+          <SignUp />
           <Logout />
           <Login />
           <Header />
@@ -49,7 +47,6 @@ function App() {
             <Route path='products' element={<ProductListing />} />
             <Route path='products/:id' element={<ProductDetails />} />
             <Route path='login' element={<Login />} />
-            <Route path='signup' element={<SignUp />} />
           </Routes>
         </>
       }

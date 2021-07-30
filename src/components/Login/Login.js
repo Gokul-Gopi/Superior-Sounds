@@ -2,15 +2,17 @@ import React from 'react'
 import { useAuth } from '../../Context/AuthContext'
 import { useProduct } from '../../Context/ProductContext'
 import '../Login/Login.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useModal } from '../../Context/ModalContext'
+import callToastify from '../../Utils/toast'
+import { networkCall } from '../../Utils/NetworkCalls'
 
 
 const Login = () => {
-
-    const { authDispatch } = useAuth();
+    const { dispatch } = useProduct()
+    const { loginHandler } = useAuth();
     const { modalState, modalDispatch } = useModal()
     const navigate = useNavigate()
 
@@ -19,43 +21,30 @@ const Login = () => {
         password: ''
     })
 
-    const [errorMessage, seterrorMessage] = useState('')
+    // const [errorMessage, seterrorMessage] = useState('')
 
-    const loginHandler = async (event) => {
-        event.preventDefault();
+    const loginUser = async () => {
+        dispatch({ type: 'SET_LOADING' })
+        const response = await loginHandler(credentials)
 
-        try {
-            let { data } = await axios.post('/user/login', credentials);
-            if (data.success) {
-                const user = data.user;
-                authDispatch({ type: "SET_USER", payload: user.name });
-                authDispatch({ type: "SET_USER_TOKEN", payload: user.token });
-                localStorage.setItem('userDetails', JSON.stringify({
-                    name: user.name,
-                    token: user.token,
-                }))
-                modalDispatch({ type: 'LOGIN' })
-                navigate('/')
-            }
-            else {
-                seterrorMessage(data.message)
-                setCredentials((preValue) => ({
-                    eMail: '',
-                    password: ''
-                }))
-            }
-        } catch (err) {
-            console.log(`Error: ${err.message}`);
+        if (response.status === 200) {
+            modalDispatch({ type: 'LOGIN' })
+            navigate('/')
+            callToastify(`Successfully logged in!`)
+        } else {
+            callToastify(response.data.message, 'ERROR')
         }
 
+        dispatch({ type: 'SET_LOADING' })
     }
+
 
     return (
         <div className='login' style={{ display: modalState.login ? 'block' : 'none' }} onClick={() => modalDispatch({ type: 'LOGIN' })}>
 
             <div className="login-container" onClick={(e) => e.stopPropagation()} >
-                <div><span style={{ color: 'red' }}>{errorMessage}</span></div>
-                <form onSubmit={(e) => loginHandler(e)}>
+                {/* <div><span style={{ color: 'red' }}>{errorMessage}</span></div> */}
+                <div>
                     <div>
                         <label htmlFor="name">E-mail</label>
                         <input type="text" value={credentials.eMail} onChange={(e) => setCredentials(preValue => ({ ...preValue, eMail: e.target.value }))} />
@@ -67,9 +56,9 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <button>Login</button>
+                        <button onClick={() => loginUser()} > Login</button>
                     </div>
-                </form>
+                </div>
                 <div className='create-account-link'>
                     <span>Dont have an account? &nbsp; <strong onClick={() => {
                         modalDispatch({ type: 'LOGIN' })

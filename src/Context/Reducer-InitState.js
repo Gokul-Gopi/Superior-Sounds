@@ -28,7 +28,6 @@ const reducer = (state, action) => {
         case 'REMOVE_FROM_WISHLIST': let updatedWishlist = removeFromWishlist(state.wishlist, action.payload)
             return { ...state, wishlist: updatedWishlist }
 
-
         // case 'REMOVE_FROM_CART': let updatedCart = removeFromCart(state.cart, action.payload)
         //     return { ...state, cart: updatedCart }
 

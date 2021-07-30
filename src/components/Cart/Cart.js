@@ -3,6 +3,7 @@ import { useProduct } from '../../Context/ProductContext'
 import '../Cart/Cart.css'
 import { addToWishlist, modifyCartItemsQty, removeItemFromCart } from "../../Utils/NetworkCalls";
 import { calculatePriceAndSubtotal } from '../../Utils/cart'
+import { FaGuitar } from 'react-icons/fa'
 
 
 const Cart = () => {
@@ -59,7 +60,7 @@ const Cart = () => {
 
             </div> :
             <div className='empty-cart'>
-                <i class="fas fa-guitar"></i>
+                <FaGuitar className='guitar-icon' />
                 <span>Your cart seems empty...</span>
             </div>
 

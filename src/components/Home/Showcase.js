@@ -3,6 +3,8 @@ import './Showcase.css'
 import { Link } from "react-router-dom";
 import { useAuth } from '../../Context/AuthContext';
 import { useModal } from '../../Context/ModalContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Showcase = () => {
@@ -25,8 +27,6 @@ const Showcase = () => {
                 <Link to='/products'>
                     <button className='browse-btn' >Store</button>
                 </Link>
-
-
 
             </div>
 

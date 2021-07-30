@@ -9,6 +9,7 @@ import { FaAward } from 'react-icons/fa'
 const ProductDetails = () => {
     const { id } = useParams()
     const { dispatch } = useProduct()
+    const { authState } = useAuth()
     const [product, setProduct] = useState({})
 
     useEffect(() => {
@@ -45,8 +46,8 @@ const ProductDetails = () => {
                     <span><i class="fas fa-check"></i> Bank Offers Available</span>
 
                     <div className='product-page_btns'>
-                        <button className='add-to-cart-btn' onClick={(e) => addToCart(e, id, dispatch)}><i class="fas fa-shopping-cart"></i>&nbsp; Add to cart</button>
-                        <button className='wishlist-btn' onClick={(e) => addToWishlist(e, id, dispatch)}><i class="fas fa-heart"></i>&nbsp; Add to wishlist</button>
+                        <button className='add-to-cart-btn' onClick={(e) => addToCart(e, id, dispatch, authState.isLoggedIn)}><i class="fas fa-shopping-cart"></i>&nbsp; Add to cart</button>
+                        <button className='wishlist-btn' onClick={(e) => addToWishlist(e, id, dispatch, authState.isLoggedIn)}><i class="fas fa-heart"></i>&nbsp; Add to wishlist</button>
                     </div>
                 </div>
 

@@ -1,9 +1,7 @@
-@import url('/src/index.css');
-
-.navibar{
+.navigation-bar{
     display: flex;
     align-items: center;
-    padding: 1.2rem;
+    padding: 1.3rem;
     box-shadow: 4px 7px 8px -8px rgba(0, 0, 0, 0.33);
 }
 
@@ -22,11 +20,6 @@
     margin-left:10px;
 }
 
-
-.link-to-home:hover{
-    text-decoration: none;
-}
-
 .primary-heading{
     font-size: 2.1rem;
     margin: 0px;
@@ -38,7 +31,6 @@
     letter-spacing: 22.5px;
     margin: 0px;
     font-weight: 600;
-
 }
 
 .header_search{
@@ -64,10 +56,11 @@
 
 .header_options{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
-    justify-content: space-evenly;
-    margin-left: 2rem;
-    width: 235px;
+    width: 25%;
+    margin: 0 50px;
 }
 
 .header_options button{
@@ -78,9 +71,20 @@
     color: var(--primary-color);
 }
 
-.header_options i {
-    font-size: 1.5rem;
+.header_options .link-name{
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--primary-color);
+}
+
+.header_options .navbar-icon{
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+.header_options .navbar-icon:hover{
+   transform: scale(1.2);
 }
 
 .cart-length{
@@ -102,7 +106,7 @@
     transform: scale(1.5);  
 }
 
-.tooltiptext{
+/* .tooltiptext{
     position: absolute;
     top: 120%;
     right: -75%;
@@ -126,8 +130,8 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent var(--primary-color) transparent;
-}
+} */
 
-.userLogoBtn:hover .tooltiptext {
+/* .userLogoBtn:hover .tooltiptext {
     visibility: visible;
-}
+} */

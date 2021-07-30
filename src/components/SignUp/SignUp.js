@@ -6,12 +6,17 @@ import { AiFillEye } from 'react-icons/ai'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useModal } from '../../Context/ModalContext'
+import { useProduct } from '../../Context/ProductContext'
+import { useAuth } from '../../Context/AuthContext'
+import callToastify from '../../Utils/toast'
+import { networkCall } from '../../Utils/NetworkCalls'
 
 
 const SignUp = () => {
-
-    const navigate = useNavigate()
-    const { modalState, modalDispatch } = useModal()
+    const navigate = useNavigate();
+    const { dispatch } = useProduct();
+    const { authState, signUpHandler } = useAuth()
+    const { modalState, modalDispatch } = useModal();
 
     const [userDetails, setuserDetails] = useState({
         firstName: '',
@@ -65,19 +70,23 @@ const SignUp = () => {
         return validator
     }
 
-    const signUpHandler = async (event) => {
+    const signUpUser = async (event,) => {
+        dispatch({ type: 'SET_LOADING' })
         event.preventDefault()
-        console.log(validateForm());
+
         if (validateForm()) {
-            try {
-                const { data: { token, name } } = await axios.post('/user/signup', userDetails)
-                localStorage.setItem('userDetails', JSON.stringify({ name, token }))
-                window.location.reload();
-            } catch (err) {
-                console.log(`Error: ${err.message}`)
+            const response = await signUpHandler(userDetails)
+            if (response.status === 201) {
+                modalDispatch({ type: 'SIGN_UP' })
+                callToastify(`Welcome ${response.data.name}`)
+                navigate('/')
+            } else {
+                callToastify('Something went wrong! Try again later', 'error')
             }
         }
+        dispatch({ type: 'SET_LOADING' })
     }
+
 
     return (
         <div className='signup' style={{ display: modalState.signUp ? 'block' : 'none' }} onClick={() => modalDispatch({ type: 'SIGN_UP' })}>
@@ -131,7 +140,7 @@ const SignUp = () => {
                         <span className='error'>{formErrors.confirmPwd}</span>
                     </div>
                     <div>
-                        <button className='submit-btn' onClick={(e) => signUpHandler(e)}>Sign Up</button>
+                        <button className='submit-btn' onClick={(e) => signUpUser(e)}>Sign Up</button>
                     </div>
                 </form>
             </div>

@@ -178,9 +178,9 @@
     height: 70vh;
 }
 
-.empty-cart i{
+.empty-cart .guitar-icon{
     font-size: 17rem;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
 .empty-cart span{

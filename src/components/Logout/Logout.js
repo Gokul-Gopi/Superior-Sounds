@@ -7,16 +7,17 @@ import { useNavigate } from 'react-router-dom'
 import { useProduct } from '../../Context/ProductContext'
 
 const Logout = () => {
-    const { authState, authDispatch } = useAuth()
-    const { modalState, modalDispatch } = useModal()
-    const navigate = useNavigate()//----------------navigate to home----
+    const { dispatch } = useProduct();
+    const { authState } = useAuth();
+    const { modalState, modalDispatch } = useModal();
+    const navigate = useNavigate();
 
     const logoutHandler = () => {
+        dispatch({ type: 'SET_LOADING' });
         modalDispatch({ type: 'LOGOUT' })
-        navigate('/')
-        window.location.reload()
-        localStorage.removeItem('userDetails')
-        authDispatch({ type: 'RESET' })
+        localStorage.removeItem('userDetails');
+        navigate('/');
+        window.location.reload();
     }
 
 

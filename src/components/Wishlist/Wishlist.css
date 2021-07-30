@@ -1,3 +1,20 @@
+.wishlist{
+    padding: 1.2rem 4rem;
+}
+
+.wishlist h4{
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.wishlist-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+}
+
 .empty-wishlist{
     display: flex;
     flex-direction: column;
@@ -7,9 +24,9 @@
     height: 70vh;
 }
 
-.empty-wishlist i{
+.empty-wishlist .heart-icon{
     font-size: 17rem;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
 .empty-wishlist span{

@@ -9,18 +9,13 @@ import { FaAward } from 'react-icons/fa'
 
 const ProductCard = (props) => {
 
-    const { state, dispatch } = useProduct();
-    const { authState, authReducer } = useAuth()
+    const { dispatch } = useProduct();
+    const { authState } = useAuth()
 
     const [changesInButton, setChangesInButton] = useState({
         wishListBtn: false,
         addToCartBtn: false
     });
-
-    // const addToCartHandler = (id) => {
-    //     dispatch({ type: 'ADD_TO_CART', payload: id })
-    //     setChangesInButton(preValue => ({ ...preValue, addToCartBtn: true }))
-    // }
 
     const moveToWishlist = (id) => {
         dispatch({ type: 'MOVE_TO_WISHLIST', payload: id })
@@ -60,7 +55,7 @@ const ProductCard = (props) => {
                     </Link>
                     : <button className='addToCartBtn' onClick={() => addToCartHandler(props.id)}>Add to cart</button>
                 } */}
-                <button className='addToCartBtn' onClick={(e) => addToCart(e, props.id, dispatch)}>Add to cart</button>
+                <button className='addToCartBtn' onClick={(e) => addToCart(e, props.id, dispatch, authState.isLoggedIn)}>Add to cart</button>
             </div>
 
             <button className='wishlistBtn'>

@@ -1,0 +1,39 @@
+.wishlist-card{
+    border: 2px solid var(--primary-color);
+    border-radius: 7px;
+    box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.30);
+    padding: 0.5rem;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.wishlist-card .product-img{
+    height: 250px;
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+.wishlist-card .product-img img{
+    height: 250px;
+    width: 250px;
+}
+
+.wishlist-card .product-info{
+    margin-bottom: 10px;
+    color: black;
+    text-align: center;
+}
+
+.wishlist-card-btns{
+    text-align: center;
+}
+
+.wishlist-card-btns button{
+    margin-right: 10px;
+    padding: 0.4rem;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}

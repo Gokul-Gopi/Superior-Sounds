@@ -5,10 +5,12 @@ import img2 from '../../Images/bannerImage2.jpg'
 import img3 from '../../Images/bannerImage3.jpg'
 import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { toast } from 'react-toastify';
+
 
 const Banner = () => {
     return (
-        <Carousel className='banner'>
+        <Carousel className='banner' style={{ zIndex: '1' }} >
             <Carousel.Item interval={2500}>
                 <img
                     className="d-block w-100"
