@@ -12,7 +12,6 @@ import { BiUserCircle } from 'react-icons/bi'
 
 
 const Header = () => {
-    // {state.cart.length !== 0 && <span className='cart-length'>{state.cart.length}</span>}
     const customLinkStyling = { display: 'flex', flexDirection: 'column', textDecoration: 'none', alignItems: 'center' }
     const { dispatch } = useProduct();
     const { authState } = useAuth();
