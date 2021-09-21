@@ -32,14 +32,13 @@ const networkCall = async (route, method, data) => {
             try {
                 return await axios({
                     method: 'put',
-                    url: route,
-                    data: `${Backend}${route}`
+                    url: `${Backend}${route}`,
+                    data: data
                 })
             } catch (err) {
-                return console.log(`Error: ${err.message}`);
+                return err.message
             }
 
-            break;
 
         case 'DELETE':
             try {
@@ -48,10 +47,8 @@ const networkCall = async (route, method, data) => {
                     url: `${Backend}${route}`,
                 })
             } catch (err) {
-                console.log(`Error: ${err.message}`);
+                return err.message;
             }
-
-            break;
 
         default:
             break;
@@ -98,8 +95,9 @@ const addToCart = async (event, productID, dispatch, isLoggedIn) => {
 const modifyCartItemsQty = async (event, type, productID, dispatch) => {
     dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
-    const { data } = await networkCall(`/cart/${productID}`, 'PUT', type)
-    dispatch({ type: 'SET_CART', payload: data.userCart })
+    const response = await networkCall(`/cart/${productID}`, 'PUT', type)
+    console.log(response)
+    dispatch({ type: 'SET_CART', payload: response.data.userCart })
     dispatch({ type: 'SET_LOADING' })
 }
 
