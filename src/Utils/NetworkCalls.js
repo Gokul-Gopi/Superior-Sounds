@@ -87,10 +87,10 @@ const addToCart = async (event, productID, dispatch, isLoggedIn) => {
                 callToastify('Already in cart !')
             }
         } catch {
-            isLoggedIn ? callToastify('Something went wrong ! Try Again') : callToastify('You are not logged in !')
+            callToastify('Something went wrong ! Try Again')
         }
     } else {
-        callToastify('You are not logged in')
+        callToastify('You are not logged in', 'Error')
     }
 
     dispatch({ type: 'SET_LOADING' })
@@ -131,7 +131,7 @@ const addToWishlist = async (event, productID, dispatch, isLoggedIn) => {
         }
     }
     else {
-        callToastify('You are not logged in')
+        callToastify('You are not logged in', 'Error')
     }
 
     dispatch({ type: 'SET_LOADING' })
