@@ -15,14 +15,33 @@
     left: 50%;
     display: flex;
     border: 2px solid var(--primary-color);
-    width: 70%;
+    width: 55rem;
     background-color: white;
     border-radius: 5px;
 }
 
+.signup-container .input-box{
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 0 0.8rem;
+    background-color: #f7f2ff;
+}
+
+.signup-container .footer{
+    text-align: center;
+}
+
+.signup-container .footer strong{
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+
 .signup_side-image{
     position: relative;
-    background-image: linear-gradient(rgba(250,250,250,.7),rgba(250,250,250,.7)), url('https://images.unsplash.com/photo-1541689592655-f5f52825a3b8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=302&q=80');
+    background-image: linear-gradient(45deg,rgba(124, 58, 237, 0.7),rgba(250, 250, 250, 0.7)), url('https://images.unsplash.com/photo-1541689592655-f5f52825a3b8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=302&q=80');
     background-repeat: no-repeat;
     background-size: cover;
     width: 40%;
@@ -33,11 +52,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    color: var(--primary-color);
 }
 
 .signup_side-image h1, .signup_side-image h2{
     color: var(--primary-color);
+    color: white;
     font-weight: 600;
     margin: 0;
 }
@@ -56,14 +75,13 @@
     padding: 2rem;
 }
 
-.signup-form div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.signup-form .icon{
+    font-size: 1.5rem;
+    color: var(--primary-color);
 }
 
-.signup-form div:not(:last-child){
-    margin-bottom: 20px;
+.signup-form > div:not(:last-child){
+    margin-bottom: 1.5rem;
 }
 
 .signup-form div:last-child{
@@ -78,9 +96,14 @@
 .signup-form input{
     padding: 0.4rem 0.8rem;
     border-radius: 5px;
-    border: 1px solid var(--primary-color);
+    border: none;
     font-size: 1.2rem;
-    background-color: #F5F3FF;
+    background-color: #f7f2ff;
+    width: 100%;
+}
+
+.signup-form input:focus{
+    outline: none;
 }
 
 .signup-form .submit-btn{
@@ -90,6 +113,7 @@
     padding: 0.5rem;
     border-radius: 5px;
     border: none;
+    width: 100%;
 }
 
 .close-form-icon{
@@ -99,11 +123,6 @@
     right: 1%;
     top: 1%;
     cursor: pointer;
-}
-
-.signup-form label[for = 'password']{
-    display: flex;
-    justify-content: space-between;
 }
 
 .show-pwd{

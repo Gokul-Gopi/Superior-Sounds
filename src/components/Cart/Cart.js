@@ -3,8 +3,7 @@ import { useProduct } from '../../Context/ProductContext'
 import '../Cart/Cart.css'
 import { addToWishlist, modifyCartItemsQty, removeItemFromCart } from "../../Utils/NetworkCalls";
 import { calculatePriceAndSubtotal } from '../../Utils/cart'
-import { FaGuitar } from 'react-icons/fa'
-
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 
 const Cart = () => {
     const { state, dispatch } = useProduct()
@@ -60,8 +59,8 @@ const Cart = () => {
 
             </div> :
             <div className='empty-cart'>
-                <FaGuitar className='guitar-icon' />
-                <span>Your cart seems empty...</span>
+                <AiOutlineShoppingCart className='icon' />
+                <span>&nbsp;Your cart seems empty..</span>
             </div>
 
 

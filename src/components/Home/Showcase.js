@@ -3,7 +3,7 @@ import './Showcase.css'
 import { Link } from "react-router-dom";
 import { useAuth } from '../../Context/AuthContext';
 import { useModal } from '../../Context/ModalContext';
-import { toast } from 'react-toastify';
+import { BiStoreAlt } from 'react-icons/bi'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -17,17 +17,14 @@ const Showcase = () => {
         <div className='showcase-products'>
 
             <div className='banner-btns'>
-                <span>Pick from the best brands</span>
-
-                {authState.isLoggedIn ?
-                    <span>Welcome {authState.currentUserName}!</span> :
-                    <button className='login-btn' onClick={() => modalDispatch({ type: "SIGN_UP" })}>Sign up</button>
-                }
+                <span className='banner-title'>Pick from the best brands</span>
 
                 <Link to='/products'>
-                    <button className='browse-btn' >Store</button>
+                    <button className='browse-btn'>
+                        {/* <BiStoreAlt className='icon' /> */}
+                        <span>Store</span>
+                    </button>
                 </Link>
-
             </div>
 
             <div className='bannerImg'>

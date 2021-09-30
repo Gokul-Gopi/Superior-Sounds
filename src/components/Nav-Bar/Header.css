@@ -10,9 +10,9 @@
     margin-left: 2rem;
 }
 
-.header_logo img{
-    height:60px;
-    width: 60px;
+.header_logo .icon{
+    font-size: 3.5rem;
+    color: var(--primary-color);
 }
 
 .header_headings{
@@ -42,11 +42,11 @@
     height: 40px;
     margin-left: auto;
     padding: 0.8rem;
-    width: 450px;
+    width: 70%;
     border: none;
     border-radius: 5px;
-    box-shadow: 4px 7px 8px -8px rgba(0, 0, 0, 0.23);
-    background-color: #F4F4F5;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgb(243, 243, 243);
     font-size: 0.9rem;
 }
 
@@ -58,9 +58,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
     width: 25%;
-    margin: 0 50px;
+    margin: 0 0.8rem 0 1rem;
 }
 
 .header_options button{
@@ -106,32 +105,3 @@
     transform: scale(1.5);  
 }
 
-/* .tooltiptext{
-    position: absolute;
-    top: 120%;
-    right: -75%;
-    visibility: hidden;
-    font-weight: 200;
-    font-size: 11px;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.2rem;
-    text-align: center;
-    border-radius: 6px;
-    transition: 0.1s;
-}
-
-.tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent var(--primary-color) transparent;
-} */
-
-/* .userLogoBtn:hover .tooltiptext {
-    visibility: visible;
-} */

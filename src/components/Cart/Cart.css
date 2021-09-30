@@ -171,16 +171,14 @@
 
 .empty-cart{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #DDD6FE;
     height: 70vh;
 }
 
-.empty-cart .guitar-icon{
-    font-size: 17rem;
-    margin-bottom: 1rem;
+.empty-cart .icon{
+    font-size: 4rem;
 }
 
 .empty-cart span{

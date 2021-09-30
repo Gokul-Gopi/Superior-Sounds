@@ -9,10 +9,11 @@ import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BiHeart } from 'react-icons/bi'
 import { BiStoreAlt } from 'react-icons/bi'
 import { BiUserCircle } from 'react-icons/bi'
+import { BsMusicNote } from 'react-icons/bs'
 
 
 const Header = () => {
-    const customLinkStyling = { display: 'flex', flexDirection: 'column', textDecoration: 'none', alignItems: 'center' }
+    const customLinkStyling = { display: 'flex', flexDirection: 'column', textDecoration: 'none', alignItems: 'center', width: '5rem' }
     const { dispatch } = useProduct();
     const { authState } = useAuth();
     const { modalDispatch } = useModal();
@@ -23,7 +24,7 @@ const Header = () => {
             <Link to='/' style={{ textDecoration: 'none' }}>
                 <div className='header_main'>
                     <div className='header_logo'>
-                        <img src="https://image.flaticon.com/icons/png/512/142/142437.png" alt="logo" />
+                        <BsMusicNote className='icon' />
                     </div>
 
                     <div className="header_headings">

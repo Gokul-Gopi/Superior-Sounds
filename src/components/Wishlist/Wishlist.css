@@ -17,16 +17,14 @@
 
 .empty-wishlist{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #DDD6FE;
     height: 70vh;
 }
 
-.empty-wishlist .heart-icon{
-    font-size: 17rem;
-    margin-bottom: 1rem;
+.empty-wishlist .icon{
+    font-size: 4rem;
 }
 
 .empty-wishlist span{

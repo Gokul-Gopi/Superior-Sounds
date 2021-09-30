@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../Context/AuthContext'
 import { addToCart } from "../../Utils/NetworkCalls";
 import { FaAward } from 'react-icons/fa'
+import { AiFillStar } from 'react-icons/ai'
 
 
 const ProductCard = (props) => {
@@ -37,24 +38,19 @@ const ProductCard = (props) => {
                     <img src={props.img} alt="ProductImage" />
                 </div>
             </Link>
+
             <div className='productInfo'>
-                <div>
-                    <span className='productName'>{props.name}</span>
-                    {/* <span className='productType'>{props.type}</span> */}
+                <div className='name-rating-info'>
+                    <span className='name'>{props.name}</span>
+                    <span className='rating'><AiFillStar /> {props.ratings}</span>
                 </div>
-                <div>
-                    <span className='productRating'><i class="far fa-star"></i>{props.ratings}</span>
-                    <span className='productPrice'>Rs. {props.price}</span>
+                <div className='type-price-info'>
+                    <span className='type'>{props.type}</span>
+                    <span className='price'>Rs {props.price}</span>
                 </div>
             </div>
 
             <div>
-                {/* {changesInButton.addToCartBtn ?
-                    <Link to='/cart'>
-                        <button className='addToCartBtn' style={{ color: 'white', background: '#4B5563' }} >Go to cart</button>
-                    </Link>
-                    : <button className='addToCartBtn' onClick={() => addToCartHandler(props.id)}>Add to cart</button>
-                } */}
                 <button className='addToCartBtn' onClick={(e) => addToCart(e, props.id, dispatch, authState.isLoggedIn)}>Add to cart</button>
             </div>
 

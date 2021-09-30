@@ -15,8 +15,8 @@ const Wishlist = () => {
             {state.wishlist.length === 0 ?
                 <>
                     <div className='empty-wishlist'>
-                        <BiHeart className='heart-icon' />
-                        <span>Start Wishlisting...</span>
+                        <BiHeart className='icon' />
+                        <span>&nbsp;Start Wishlisting..</span>
                     </div>
                 </> :
                 <>
