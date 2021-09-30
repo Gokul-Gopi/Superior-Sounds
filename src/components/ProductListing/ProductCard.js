@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './ProductCard.css'
 import { useProduct } from '../../Context/ProductContext'
 import { Link } from 'react-router-dom'
@@ -14,23 +14,6 @@ const ProductCard = (props) => {
     const { dispatch } = useProduct();
     const { authState } = useAuth()
     const navigate = useNavigate()
-
-    // const [changesInButton, setChangesInButton] = useState({
-    //     wishListBtn: false,
-    //     addToCartBtn: false
-    // });
-
-    // const moveToWishlist = (id) => {
-    //     dispatch({ type: 'MOVE_TO_WISHLIST', payload: id })
-    //     // setChangesInButton(preValue => ({ ...preValue, wishListBtn: true }))
-    // }
-
-    // const removeFromWishList = (id) => {
-    //     dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: id })
-    //     // setChangesInButton(preValue => ({ ...preValue, wishListBtn: false }))
-    // }
-
-
 
     return (
         <div className={props.inStock ? 'product-card' : 'product-card out-of-stock-card'}>

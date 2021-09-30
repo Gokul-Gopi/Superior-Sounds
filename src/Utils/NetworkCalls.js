@@ -76,18 +76,23 @@ const getUserCart = async (dispatch) => {
 const addToCart = async (event, productID, dispatch, isLoggedIn) => {
     dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
-    try {
-        const { data } = await networkCall(`/cart/${productID}`, 'POST')
-        console.log(data)
-        if (data.success) {
-            dispatch({ type: 'SET_CART', payload: data.response })
-            callToastify(' 🛒 Added to cart!')
-        } else {
-            callToastify('Already in cart !')
+
+    if (isLoggedIn) {
+        try {
+            const { data } = await networkCall(`/cart/${productID}`, 'POST')
+            if (data.success) {
+                dispatch({ type: 'SET_CART', payload: data.response })
+                callToastify(' 🛒 Added to cart!')
+            } else {
+                callToastify('Already in cart !')
+            }
+        } catch {
+            isLoggedIn ? callToastify('Something went wrong ! Try Again') : callToastify('You are not logged in !')
         }
-    } catch {
-        isLoggedIn ? callToastify('Something went wrong ! Try Again') : callToastify('You are not logged in !')
+    } else {
+        callToastify('You are not logged in')
     }
+
     dispatch({ type: 'SET_LOADING' })
 
 }
@@ -112,16 +117,21 @@ const removeItemFromCart = async (event, productID, dispatch) => {
 const addToWishlist = async (event, productID, dispatch, isLoggedIn) => {
     dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
-    try {
-        const { data } = await networkCall(`/wishlist/${productID}`, 'POST')
-        if (data.success) {
-            dispatch({ type: 'SET_WISHLIST', payload: data.response })
-            callToastify(' 💜 Added to wishlist')
-        } else {
-            callToastify(data.message)
+    if (isLoggedIn) {
+        try {
+            const { data } = await networkCall(`/wishlist/${productID}`, 'POST')
+            if (data.success) {
+                dispatch({ type: 'SET_WISHLIST', payload: data.response })
+                callToastify(' 💜 Added to wishlist')
+            } else {
+                callToastify(data.message)
+            }
+        } catch {
+            callToastify('Something went wrong ! Try Again')
         }
-    } catch {
-        isLoggedIn ? callToastify('Something went wrong ! Try Again') : callToastify('You are not logged in !')
+    }
+    else {
+        callToastify('You are not logged in')
     }
 
     dispatch({ type: 'SET_LOADING' })

@@ -141,7 +141,7 @@
 }
 
 .product-card .card-btns button:hover{
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
 .product-card .card-btns button:active{
