@@ -73,7 +73,7 @@ const Login = () => {
                     </div>
                 </div>
                 <div className='create-account-link'>
-                    <span>Dont have an account? &nbsp; <strong onClick={() => {
+                    <span>Dont have an account? <strong onClick={() => {
                         modalDispatch({ type: 'LOGIN' })
                         modalDispatch({ type: 'SIGN_UP' })
                     }}
