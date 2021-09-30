@@ -121,22 +121,30 @@
     margin: 0px auto;
 }
 
-.addToCartBtn{
+.product-card .card-btns button{
     width: 100%;
     padding: 0.5rem;
     border-radius: 7px;
-    background-color: var(--primary-color);
-    color: white;
     font-weight: 600;
     border: none;
     transition: 0.2s;
 }
 
-.addToCartBtn:hover{
+.product-card .card-btns .addToCartBtn{
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.product-card .card-btns .goToCartBtn{
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+.product-card .card-btns button:hover{
     transform: translateY(-4px);
 }
 
-.addToCartBtn:active{
+.product-card .card-btns button:active{
     transform: translateY(0px);
 }
 

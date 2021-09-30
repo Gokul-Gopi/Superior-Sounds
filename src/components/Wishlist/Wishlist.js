@@ -16,7 +16,7 @@ const Wishlist = () => {
                 <>
                     <div className='empty-wishlist'>
                         <BiHeart className='icon' />
-                        <span>&nbsp;Start Wishlisting..</span>
+                        <span>&nbsp;Start wishlisting..</span>
                     </div>
                 </> :
                 <>

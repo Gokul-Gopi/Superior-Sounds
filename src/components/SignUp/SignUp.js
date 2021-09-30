@@ -100,7 +100,7 @@ const SignUp = () => {
                     </div>
                 </div>
                 <form className='signup-form'>
-                    <RiCloseFill className='close-form-icon' onClick={() => modalDispatch({ type: 'SIGN_UP' })} />
+                    {/* <RiCloseFill className='close-form-icon' onClick={() => modalDispatch({ type: 'SIGN_UP' })} /> */}
 
                     <div>
                         <div className='input-box'>

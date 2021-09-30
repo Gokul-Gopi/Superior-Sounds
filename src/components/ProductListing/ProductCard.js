@@ -6,27 +6,29 @@ import { useAuth } from '../../Context/AuthContext'
 import { addToCart } from "../../Utils/NetworkCalls";
 import { FaAward } from 'react-icons/fa'
 import { AiFillStar } from 'react-icons/ai'
-
+import { useNavigate } from 'react-router-dom'
+import { addToWishlist } from '../../Utils/NetworkCalls'
+import { removeItemFromWishlist } from '../../Utils/wishlist'
 
 const ProductCard = (props) => {
-
     const { dispatch } = useProduct();
     const { authState } = useAuth()
+    const navigate = useNavigate()
 
-    const [changesInButton, setChangesInButton] = useState({
-        wishListBtn: false,
-        addToCartBtn: false
-    });
+    // const [changesInButton, setChangesInButton] = useState({
+    //     wishListBtn: false,
+    //     addToCartBtn: false
+    // });
 
-    const moveToWishlist = (id) => {
-        dispatch({ type: 'MOVE_TO_WISHLIST', payload: id })
-        setChangesInButton(preValue => ({ ...preValue, wishListBtn: true }))
-    }
+    // const moveToWishlist = (id) => {
+    //     dispatch({ type: 'MOVE_TO_WISHLIST', payload: id })
+    //     // setChangesInButton(preValue => ({ ...preValue, wishListBtn: true }))
+    // }
 
-    const removeFromWishList = (id) => {
-        dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: id })
-        setChangesInButton(preValue => ({ ...preValue, wishListBtn: false }))
-    }
+    // const removeFromWishList = (id) => {
+    //     dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: id })
+    //     // setChangesInButton(preValue => ({ ...preValue, wishListBtn: false }))
+    // }
 
 
 
@@ -50,14 +52,17 @@ const ProductCard = (props) => {
                 </div>
             </div>
 
-            <div>
-                <button className='addToCartBtn' onClick={(e) => addToCart(e, props.id, dispatch, authState.isLoggedIn)}>Add to cart</button>
+            <div className='card-btns'>
+                {props.inCart
+                    ? <button className='goToCartBtn' onClick={() => { navigate('/cart') }}>Go to cart</button>
+                    : <button className='addToCartBtn' onClick={(e) => addToCart(e, props.id, dispatch, authState.isLoggedIn)}>Add to cart</button>
+                }
             </div>
 
             <button className='wishlistBtn'>
-                {changesInButton.wishListBtn ?
-                    <i onClick={() => removeFromWishList(props.id)} class="fas fa-heart"></i>
-                    : <i onClick={() => moveToWishlist(props.id)} class="far fa-heart"></i>
+                {props.inWishlist
+                    ? <i onClick={(e) => removeItemFromWishlist(e, props.id, dispatch)} class="fas fa-heart"></i>
+                    : <i onClick={(e) => addToWishlist(e, props.id, dispatch, authState.isLoggedIn)} class="far fa-heart"></i>
                 }
             </button>
         </div>

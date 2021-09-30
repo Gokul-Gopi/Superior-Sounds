@@ -9,6 +9,8 @@ import { networkCall } from "../../Utils/NetworkCalls";
 const ProductListing = () => {
 
     const { state, dispatch } = useProduct()
+    const itemsInCart = state.cart.map(e => e?._id)
+    const itemsInWishlist = state.wishlist.map(e => e?._id)
 
     useEffect(() => {
         dispatch({ type: 'SET_LOADING' })
@@ -36,7 +38,7 @@ const ProductListing = () => {
 
             <div className="allProducts-container">
                 {sortedProducts.map(item => {
-                    return <ProductCard key={item._id} id={item._id} name={item.name} ratings={item.rating} price={item.price} img={item.image} type={item.type} bestSeller={item.isBestSeller} inStock={item.inStock} />
+                    return <ProductCard key={item._id} id={item._id} name={item.name} ratings={item.rating} price={item.price} img={item.image} type={item.type} bestSeller={item.isBestSeller} inStock={item.inStock} inCart={itemsInCart.includes(item._id)} inWishlist={itemsInWishlist.includes(item._id)} />
                 })}
             </div>
 

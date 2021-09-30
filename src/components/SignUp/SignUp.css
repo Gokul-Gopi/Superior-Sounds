@@ -118,10 +118,10 @@
 
 .close-form-icon{
     position: absolute;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--primary-color);
-    right: 1%;
-    top: 1%;
+    right: 0.2rem;
+    top:0.1rem;
     cursor: pointer;
 }
 
