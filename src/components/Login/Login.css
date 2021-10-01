@@ -66,6 +66,7 @@
 .login-container .options button{
     height: 2.5rem;
     width: 48%;
+    transition: all 0.2s;
 }
 
 .login-container .login-btn{
@@ -78,7 +79,7 @@
 }
 
 .login-container .login-btn:hover{
-    border: 2px solid rgb(0, 225, 255);
+    transform: scale(1.01); /*change this style*/
 }
 
 .login-container .guest-credentials-btn{
@@ -92,7 +93,7 @@
 }
 
 .login-container .guest-credentials-btn:hover{
-    border: 2px solid rgb(0, 225, 255);
+    transform: scale(1.05);
 }
 
 .create-account-link{
