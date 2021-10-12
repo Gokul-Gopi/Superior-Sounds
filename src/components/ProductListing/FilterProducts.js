@@ -58,7 +58,7 @@ const FilterProducts = () => {
 
                 <div className='slider-container'>
                     <label htmlFor="">Price</label>
-                    <input className='sliderFilter' type="range" max='40000' min='8000' step='5000' default='10000' />
+                    <input className='sliderFilter' type="range" max='50000' min='2000' step='5000' default='2000' onChange={(e) => dispatch({ type: 'SORT_BY_PRICE_RANGE', payload: e.target.value })} />
                 </div>
             </div>
 

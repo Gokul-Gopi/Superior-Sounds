@@ -4,14 +4,23 @@ import '../Cart/Cart.css'
 import { addToWishlist, modifyCartItemsQty, removeItemFromCart } from "../../Utils/NetworkCalls";
 import { calculatePriceAndSubtotal } from '../../Utils/cart'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { useAuth } from '../../Context/AuthContext'
 
 const Cart = () => {
     const { state, dispatch } = useProduct()
+    const { authState } = useAuth()
+    const itemsInWishlist = state.wishlist.map(e => e._id)
 
     const priceDetails = calculatePriceAndSubtotal(state.cart)
 
-    return (
+    const moveToWishlist = (event, productID) => {
+        addToWishlist(event, productID, dispatch, authState.isLoggedIn)
+        if (!itemsInWishlist.includes(productID)) {
+            removeItemFromCart(event, productID, dispatch)
+        }
+    }
 
+    return (
         state.cart.length !== 0 ?
             <div className='cart'>
                 <main className="products-cart-container">
@@ -30,7 +39,7 @@ const Cart = () => {
                                         <span>*Cash on delivery available</span>
                                         <div>
                                             <button className='remove-btn' onClick={(e) => removeItemFromCart(e, product._id, dispatch)}>Remove</button>
-                                            <button className='wishlist-btn' onClick={(e) => addToWishlist(e, product._id, dispatch)}>Wishlist</button>
+                                            <button className='wishlist-btn' onClick={(e) => moveToWishlist(e, product._id)}>Wishlist</button>
                                         </div>
                                     </div>
                                 </div>

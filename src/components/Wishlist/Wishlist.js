@@ -9,7 +9,6 @@ const Wishlist = () => {
     const { state } = useProduct()
 
     return (
-
         <div className='wishlist'>
 
             {state.wishlist.length === 0 ?

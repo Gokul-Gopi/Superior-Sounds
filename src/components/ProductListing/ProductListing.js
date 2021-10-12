@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './ProductListing.css'
 import ProductCard from './ProductCard'
 import FilterProducts from './FilterProducts'
 import { useProduct } from '../../Context/ProductContext'
-import { sortByPrice, otherFilters } from '../../../src/array-manipulation'
+import { sortByPrice, otherFilters, sortByPriceRange } from '../../../src/array-manipulation'
 import { networkCall } from "../../Utils/NetworkCalls";
 
 const ProductListing = () => {
@@ -30,6 +30,7 @@ const ProductListing = () => {
 
     const filteredProducts = otherFilters(state.otherFilters, state.allProducts)
     const sortedProducts = sortByPrice(state.sortByPrice, filteredProducts)
+    const sortedByPriceRange = sortByPriceRange(state.sortByPriceRange, sortedProducts)
 
 
     return (
@@ -37,7 +38,7 @@ const ProductListing = () => {
             <FilterProducts />
 
             <div className="allProducts-container">
-                {sortedProducts.map(item => {
+                {sortedByPriceRange.map(item => {
                     return <ProductCard key={item._id} id={item._id} name={item.name} ratings={item.rating} price={item.price} img={item.image} type={item.type} bestSeller={item.isBestSeller} inStock={item.inStock} inCart={itemsInCart.includes(item._id)} inWishlist={itemsInWishlist.includes(item._id)} />
                 })}
             </div>

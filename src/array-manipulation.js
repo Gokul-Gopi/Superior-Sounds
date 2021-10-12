@@ -11,6 +11,7 @@ const removeFromCart = (cart, productID) => {
 }
 
 const sortByPrice = (type, products) => {
+    console.log({ type })
     if (type === 'lowToHigh') {
         return products.sort((a, b) => a.price - b.price)
     }
@@ -18,6 +19,14 @@ const sortByPrice = (type, products) => {
         return products.sort((a, b) => b.price - a.price)
     }
     return products;
+
+}
+
+const sortByPriceRange = (value, products) => {
+    if (value !== 0) {
+        return products.filter(item => +item.price > value)
+    }
+    return products
 }
 
 const otherFilters = (filters, products) => {
@@ -29,4 +38,4 @@ const otherFilters = (filters, products) => {
 
 
 
-export { removeFromWishlist, removeFromCart, sortByPrice, otherFilters }
+export { removeFromWishlist, removeFromCart, sortByPrice, otherFilters, sortByPriceRange }

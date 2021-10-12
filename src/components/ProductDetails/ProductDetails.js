@@ -23,7 +23,7 @@ const ProductDetails = () => {
         };
         fetchProduct()
         dispatch({ type: 'SET_LOADING' })
-    }, [])
+    }, [id])
 
     return (
         <div className='product-page'>

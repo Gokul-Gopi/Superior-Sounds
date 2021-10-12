@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import "./Header.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useProduct } from '../../Context/ProductContext'
 import { useAuth } from '../../Context/AuthContext'
 import { getUserCart, getUserWishlist } from "../../Utils/NetworkCalls";
@@ -10,14 +10,37 @@ import { BiHeart } from 'react-icons/bi'
 import { BiStoreAlt } from 'react-icons/bi'
 import { BiUserCircle } from 'react-icons/bi'
 import { BsMusicNote } from 'react-icons/bs'
+import { BiMenu } from 'react-icons/bi'
 
 
 const Header = () => {
-    const customLinkStyling = { display: 'flex', flexDirection: 'column', textDecoration: 'none', alignItems: 'center', width: '5rem' }
-    const { dispatch } = useProduct();
+    const { state, dispatch } = useProduct();
     const { authState } = useAuth();
     const { modalDispatch } = useModal();
+    const navigate = useNavigate()
+    const [searchSuggestion, setSearchSuggestion] = useState({
+        suggestionBox: false,
+        list: []
+    })
+    const inputRef = useRef('')
 
+    const searchProducts = (searchInput) => {
+        if (searchInput.length !== 0) {
+            const searchResults = state.allProducts.filter(product => {
+                return product.name.toLowerCase().includes(searchInput.toLowerCase())
+            })
+            setSearchSuggestion({ suggestionBox: true, list: searchResults })
+
+        } else {
+            setSearchSuggestion({ suggestionBox: false, list: [] })
+        }
+    }
+
+    const navigateToProduct = (id) => {
+        navigate(`/products/${id}`)
+        setSearchSuggestion({ suggestionBox: false, list: [] })
+        inputRef.current.value = ''
+    }
 
     return (
         <nav className='navigation-bar'>
@@ -37,34 +60,46 @@ const Header = () => {
 
 
             <div className='header_search'>
-                <input type="search" placeholder='Search products' />
+                <input type="search" placeholder='Search products' onChange={(e) => searchProducts(e.target.value)} ref={inputRef} />
+
+                {searchSuggestion.suggestionBox
+                    ? <div className="search-suggestions">
+                        {searchSuggestion.list.map(item => {
+                            return (
+                                <span className='item' onClick={() => navigateToProduct(item._id)}>{item.name}</span>
+                            )
+                        })}
+                    </div>
+                    : null
+                }
             </div>
 
-            <div className='header_options'>
+            <BiMenu className='hamburger-menu-icon' />
 
-                <Link to='/products' style={customLinkStyling}>
+            <div className='header_options'>
+                <Link to='/products' className='nav-link'>
                     <BiStoreAlt className='navbar-icon' />
                     <span className='link-name'>Store</span>
                 </Link>
 
-                <Link to='/cart' style={customLinkStyling}>
+                <Link to='/cart' className='nav-link'>
                     <AiOutlineShoppingCart className='navbar-icon' onClick={() => getUserCart(dispatch)} />
                     <span className='link-name'>Cart</span>
                 </Link>
 
-                <Link to='/wishlist' style={customLinkStyling}>
+                <Link to='/wishlist' className='nav-link'>
                     <BiHeart className='navbar-icon' onClick={() => getUserWishlist(dispatch)} />
                     <span className='link-name'>Wishlist</span>
                 </Link>
 
 
                 {authState.isLoggedIn
-                    ? <div style={customLinkStyling}>
+                    ? <div className='nav-link'>
                         <BiUserCircle className='navbar-icon' onClick={() => modalDispatch({ type: 'LOGOUT' })} />
                         <span className='link-name'>User</span>
                     </div>
 
-                    : <div style={customLinkStyling}>
+                    : <div className='nav-link'>
                         <BiUserCircle className='navbar-icon' onClick={() => modalDispatch({ type: 'LOGIN' })} />
                         <span className='link-name'>Log in</span>
                     </div>
