@@ -74,7 +74,10 @@ const Header = () => {
                 }
             </div>
 
-            <BiMenu className='hamburger-menu-icon' />
+            <input type="checkbox" id="nav-toggle" className='nav-toggle' />
+            <label htmlFor="nav-toggle">
+                <BiMenu className='hamburger-menu-icon' />
+            </label>
 
             <div className='header_options'>
                 <Link to='/products' className='nav-link'>
