@@ -90,13 +90,14 @@
 
 .header_options .nav-link{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 5rem;
   text-decoration: none;
 }
 
-.header_options button{
+.header_options .nav-btn{  
+  line-height: 1.1rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -170,15 +171,15 @@
     }
 
     .header_options{
-      position: absolute;
-      top: 100%;
-      left: 0%;
+      position: fixed;
+      top: 14%;
+      left: 0;
       flex-direction: column;
       justify-content: start;
       background-color: var(--primary-color);
-      height: 100vh;
+      height: 120vh;
       width: 100%;
-      z-index: 10;
+      z-index: 100;
       margin: 0;
       transform: scale(0,1);
       transition: transform 0.2s ease-in;
@@ -186,8 +187,6 @@
     }
 
     .nav-toggle:checked ~ .header_options{
-      display: flex;
-      align-items: center;
       transform: scale(1,1);
     }
 

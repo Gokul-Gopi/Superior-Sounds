@@ -23,7 +23,10 @@ const Header = () => {
         list: []
     })
     const inputRef = useRef('')
+    const [toggleHamburgerMenu, setHamburgerMenu] = useState(null)
 
+    const checkbox = document.querySelector('.nav-toggle')
+    console.log(checkbox)
     const searchProducts = (searchInput) => {
         if (searchInput.length !== 0) {
             const searchResults = state.allProducts.filter(product => {
@@ -74,37 +77,47 @@ const Header = () => {
                 }
             </div>
 
-            <input type="checkbox" id="nav-toggle" className='nav-toggle' />
+            <input type="checkbox" id="nav-toggle" className='nav-toggle' onClick={() => setHamburgerMenu(preState => !preState)} checked={toggleHamburgerMenu} />
             <label htmlFor="nav-toggle">
                 <BiMenu className='hamburger-menu-icon' />
             </label>
 
             <div className='header_options'>
                 <Link to='/products' className='nav-link'>
-                    <BiStoreAlt className='navbar-icon' />
-                    <span className='link-name'>Store</span>
+                    <button className='nav-btn' onClick={() => setHamburgerMenu(false)}>
+                        <BiStoreAlt className='navbar-icon' />
+                        <span className='link-name'>Store</span>
+                    </button>
                 </Link>
 
                 <Link to='/cart' className='nav-link'>
-                    <AiOutlineShoppingCart className='navbar-icon' onClick={() => getUserCart(dispatch)} />
-                    <span className='link-name'>Cart</span>
+                    <button className='nav-btn' onClick={() => { getUserCart(dispatch); setHamburgerMenu(false); }} >
+                        <AiOutlineShoppingCart className='navbar-icon' />
+                        <span className='link-name'>Cart</span>
+                    </button>
                 </Link>
 
                 <Link to='/wishlist' className='nav-link'>
-                    <BiHeart className='navbar-icon' onClick={() => getUserWishlist(dispatch)} />
-                    <span className='link-name'>Wishlist</span>
+                    <button className='nav-btn' onClick={() => { getUserWishlist(dispatch); setHamburgerMenu(false) }}>
+                        <BiHeart className='navbar-icon' />
+                        <span className='link-name'>Wishlist</span>
+                    </button>
                 </Link>
 
 
                 {authState.isLoggedIn
                     ? <div className='nav-link'>
-                        <BiUserCircle className='navbar-icon' onClick={() => modalDispatch({ type: 'LOGOUT' })} />
-                        <span className='link-name'>User</span>
+                        <button className='nav-btn' onClick={() => { modalDispatch({ type: 'LOGOUT' }); setHamburgerMenu(false) }} >
+                            <BiUserCircle className='navbar-icon' />
+                            <span className='link-name'>User</span>
+                        </button>
                     </div>
 
                     : <div className='nav-link'>
-                        <BiUserCircle className='navbar-icon' onClick={() => modalDispatch({ type: 'LOGIN' })} />
-                        <span className='link-name'>Log in</span>
+                        <button className='nav-btn' onClick={() => { modalDispatch({ type: 'LOGIN' }); setHamburgerMenu(false) }}>
+                            <BiUserCircle className='navbar-icon' />
+                            <span className='link-name'>Log in</span>
+                        </button>
                     </div>
                 }
 
