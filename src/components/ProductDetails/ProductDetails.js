@@ -13,6 +13,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null)
 
     useEffect(() => {
+			window.scrollTo(0, 0)
         const fetchProduct = async () => {
             try {
                 const { data } = await networkCall(`/products/${id}`, 'GET')

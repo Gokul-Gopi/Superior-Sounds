@@ -1,174 +1,173 @@
-.product-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    height: 475px;
-    width: 300px;
-    border-radius: 7px;
-    padding: 0.3rem;
-    margin: 50px auto 0px auto;
-    box-shadow: 2px 2px 7px 2px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s;
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 475px;
+  width: 300px;
+  border-radius: 7px;
+  padding: 0.3rem;
+  margin: 50px auto 0px auto;
+  box-shadow: 2px 2px 7px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
 }
 
-.product-card:hover{
-    box-shadow: 2px 2px 7px 2px rgba(0, 0, 0, 0.4);
-    transform: scale(1.01);
+.product-card:hover {
+  box-shadow: 2px 2px 7px 2px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
 }
 
-.out-of-stock-card::after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(250, 250, 250, 60%);
-    border-radius: 7px;
+.out-of-stock-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(250, 250, 250, 60%);
+  border-radius: 7px;
 }
 
-
-.product-card div{
-    width: 100%;
+.product-card div {
+  width: 100%;
 }
 
 .product-card img {
-    height: 300px;
+  height: 300px;
+  width: 100%;
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.best-seller-tag {
+  position: absolute;
+  top: 2%;
+  left: 3%;
+  color: #10b981;
+  padding: 0rem 0.4rem;
+  border-radius: 20px;
+  font-size: 2.2rem;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.productInfo .name-rating-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 1rem 0.2rem 1rem;
+}
+
+.productInfo .type-price-info {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.productInfo .type-price-info .type {
+  color: gray;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.productInfo .type-price-info .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.productInfo .name-rating-info .name {
+  display: inline-block;
+  font-size: 1.2rem;
+  width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.productInfo .name-rating-info .rating {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.productName {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  padding-left: 10px;
+  display: block;
+}
+
+.productType {
+  color: gray;
+  padding-left: 10px;
+  display: block;
+}
+
+.productPrice {
+  grid-area: price;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0px auto;
+}
+
+.product-card .card-btns button {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 7px;
+  font-weight: 600;
+  border: none;
+  transition: 0.2s;
+}
+
+.product-card .card-btns .addToCartBtn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.product-card .card-btns .goToCartBtn {
+  background-color: rgb(46, 46, 46);
+  color: white;
+}
+
+.product-card .card-btns button:hover {
+  transform: translateY(-5px);
+}
+
+.product-card .card-btns button:active {
+  transform: translateY(0px);
+}
+
+.product-card div:last-of-type {
+  margin-top: auto;
+}
+
+.wishlistBtn {
+  position: absolute;
+  top: 1%;
+  right: 4%;
+  color: var(--primary-color);
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  transition: 0.2s;
+}
+
+.wishlistBtn:active {
+  transform: scale(1.4);
+}
+
+@media (max-width: 800px) {
+  .product-card {
+    height: 400px;
+    width: 250px;
+  }
+
+  .product-card img {
+    height: 220px;
     width: 100%;
-    border-bottom: 1px solid rgb(206, 206, 206);
+  }
 }
-
-.best-seller-tag{
-    position: absolute;
-    top: 2%;
-    left: 3%;
-    color: #10B981;
-    padding: 0rem 0.4rem;
-    border-radius: 20px;
-    font-size: 2.2rem;
-}
-
-.productInfo{
-    display: flex;
-    flex-direction:column;
-    text-align: center;
-}
-
-.productInfo .name-rating-info{
-    display: flex;
-    justify-content: space-between;
-    padding: 0.8rem 1rem 0.2rem 1rem;
-}
-
-.productInfo .type-price-info{
-    display: flex;
-    flex-direction: column;
-    padding: 0 1rem;
-}
-
-.productInfo .type-price-info .type{
-    color: gray;
-    text-align: left;
-    margin-bottom: 1rem;
-}
-
-.productInfo .type-price-info .price{
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.productInfo .name-rating-info .name{
-    display: inline-block;
-    font-size: 1.2rem;
-    width: 70%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space:nowrap;
-    text-align: left;
-}
-
-.productInfo .name-rating-info .rating{
-    display: inline-block;
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-/* .productInfo div:nth-child(2){
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-} */
-
-.productName{
-    font-size: 1.2rem;
-    margin-top: 15px;
-    padding-left: 10px;
-    display: block;
-}
-
-.productType{
-    color: gray;
-    padding-left: 10px;
-    display: block;
-}
-
-.productPrice{
-    grid-area: price;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0px auto;
-}
-
-.product-card .card-btns button{
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 7px;
-    font-weight: 600;
-    border: none;
-    transition: 0.2s;
-}
-
-.product-card .card-btns .addToCartBtn{
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.product-card .card-btns .goToCartBtn{
-    background-color: rgb(46, 46, 46);
-    color: white;
-}
-
-.product-card .card-btns button:hover{
-    transform: translateY(-5px);
-}
-
-.product-card .card-btns button:active{
-    transform: translateY(0px);
-}
-
-.product-card div:last-of-type{
-    margin-top: auto;
-}
-
-.wishlistBtn{
-    position: absolute;
-    top: 1%;
-    right: 4%;
-    color: var(--primary-color);
-    background:transparent;
-    border: none;
-    font-size: 1.4rem;
-    transition: 0.2s;
-}
-
-.wishlistBtn:active{
-    transform: scale(1.4);
-}
-
-
-
-
-
-

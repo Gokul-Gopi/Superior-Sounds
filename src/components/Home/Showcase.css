@@ -1,99 +1,143 @@
-.showcase-products{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 5rem 0rem;
-    background-color: #F3F4F6;
-    padding: 2rem 0rem;
+.showcase-products {
+  display: flex;
+  align-items: center;
+  margin: 5rem 0rem;
+  background-color: #f3f4f6;
+  padding: 2rem 0rem;
 }
 
-.banner-title{
-    color: var(--primary-color);
-    font-weight: bold;
+.banner-title {
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
-.banner-btns{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
+.banner-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  width: 30rem;
 }
 
-.banner-btns span{
-    margin-bottom: 15px;
+.banner-btns span {
+  margin-bottom: 15px;
 }
 
-.bannerImg{
-    position: relative;
+.bannerImg {
+  position: relative;
 }
 
-.bannerImg::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(0deg,
+.bannerImg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    0deg,
     rgba(0, 0, 0, 0.9) 0%,
     rgba(0, 0, 0, 0.05) 30%,
-    rgba(0, 0, 0, 0.05) 100%);
+    rgba(0, 0, 0, 0.05) 100%
+  );
 }
 
-.bannerImg span{
-    position: absolute;
-    transform: translate(-50%,-50%);
-    bottom: 2%;
-    left: 50%;
-    color: white;
-    font-weight: 300;
+.bannerImg span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  bottom: 2%;
+  left: 50%;
+  color: white;
+  font-weight: 300;
 }
 
-.showcase-products img{
-    height: 370px;
-    border-radius: 7px;
+.bannerImages {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
-.showcase-products button{
-    height: 3rem;
-    width: 6rem;
-    border-radius: 5px;
+.showcase-products img {
+  height: 370px;
+  border-radius: 7px;
 }
 
-.browse-btn{
-    background:var(--primary-color);
-    color: white;
-    border: none;
-    transition: all 0.2s;
+.showcase-products button {
+  height: 3rem;
+  width: 6rem;
+  border-radius: 5px;
 }
 
-.signup-btn{
-    position: relative;
-    margin-top: 1rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    cursor: pointer;
+.browse-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  transition: all 0.2s;
 }
 
-.signup-btn::after{
-    position: absolute;
-    content: '';
+.signup-btn {
+  position: relative;
+  margin-top: 1rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-btn::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0.15rem;
+  background-color: var(--primary-color);
+  bottom: 0;
+  left: 0;
+  transform: scale(0, 1);
+  transition: all 0.3s;
+}
+
+.signup-btn:hover::after {
+  transform: scale(1, 1);
+}
+
+.showcase-products button:hover {
+  transform: scale(1.05);
+}
+
+@media (min-width: 900px) and (max-width: 1250px) {
+  .showcase-products {
+    flex-direction: column;
+  }
+
+  .bannerImages {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .showcase-products {
+    flex-direction: column;
+  }
+
+  .bannerImages {
+    margin-top: 2rem;
     width: 100%;
-    height: 0.15rem;
-    background-color: var(--primary-color);
-    bottom: 0;
-    left: 0;
-    transform: scale(0,1);
-    transition: all 0.3s;
-}
+    overflow-x: auto;
+    justify-content: center;
+  }
 
-.signup-btn:hover::after{
-    transform: scale(1,1);
-}
+  .showcase-products img {
+    height: 20rem;
+    border-radius: 7px;
+  }
 
-.showcase-products button:hover{
-    transform: scale(1.05);
+  .bannerImg {
+    margin: 0rem 0.5rem;
+  }
+
+  .banner-btns {
+    width: 100%;
+  }
 }

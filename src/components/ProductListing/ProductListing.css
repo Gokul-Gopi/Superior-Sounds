@@ -1,10 +1,23 @@
-.product-listing{
-    display: flex;
+.product-listing {
+  display: flex;
 }
 
-.allProducts-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 100%;
-		margin-bottom: 3rem;
+.allProducts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 800px) and (max-width: 1140px) {
+  .allProducts-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .allProducts-container {
+    grid-template-columns: 1fr;
+    padding: 0 2rem;
+  }
 }
