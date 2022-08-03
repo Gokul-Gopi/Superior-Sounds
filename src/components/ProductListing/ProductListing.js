@@ -5,6 +5,7 @@ import FilterProducts from './FilterProducts'
 import { useProduct } from '../../Context/ProductContext'
 import { sortByPrice, otherFilters, sortByPriceRange } from '../../../src/array-manipulation'
 import { networkCall } from "../../Utils/NetworkCalls";
+import Loader from '../Loader/Loader'
 
 const ProductListing = () => {
 
@@ -13,7 +14,6 @@ const ProductListing = () => {
     const itemsInWishlist = state.wishlist.map(e => e?._id)
 
     useEffect(() => {
-        dispatch({ type: 'SET_LOADING' })
         window.scrollTo(0, 0)
         const fetchProducts = async () => {
             try {
@@ -24,14 +24,15 @@ const ProductListing = () => {
             }
         }
         fetchProducts();
-        dispatch({ type: 'SET_LOADING' })
-
     }, [])
 
     const filteredProducts = otherFilters(state.otherFilters, state.allProducts)
     const sortedProducts = sortByPrice(state.sortByPrice, filteredProducts)
     const sortedByPriceRange = sortByPriceRange(state.sortByPriceRange, sortedProducts)
 
+		if(state.allProducts.length < 1){
+			return <Loader/>
+		}
 
     return (
         <div className='product-listing'>

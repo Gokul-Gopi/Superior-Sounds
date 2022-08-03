@@ -109,14 +109,14 @@ const Header = () => {
                     ? <div className='nav-link'>
                         <button className='nav-btn' onClick={() => { modalDispatch({ type: 'LOGOUT' }); setHamburgerMenu(false) }} >
                             <BiUserCircle className='navbar-icon' />
-                            <span className='link-name'>User</span>
+                            <span className='link-name'>Logout</span>
                         </button>
                     </div>
 
                     : <div className='nav-link'>
                         <button className='nav-btn' onClick={() => { modalDispatch({ type: 'LOGIN' }); setHamburgerMenu(false) }}>
                             <BiUserCircle className='navbar-icon' />
-                            <span className='link-name'>Log in</span>
+                            <span className='link-name'>Login</span>
                         </button>
                     </div>
                 }

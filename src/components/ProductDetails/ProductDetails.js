@@ -4,15 +4,15 @@ import { useAuth } from '../../Context/AuthContext'
 import { useProduct } from '../../Context/ProductContext'
 import '../ProductDetails/ProductDetails.css'
 import { networkCall, addToWishlist, addToCart } from "../../Utils/NetworkCalls";
+import Loader from '../Loader/Loader'
 
 const ProductDetails = () => {
     const { id } = useParams()
     const { dispatch } = useProduct()
     const { authState } = useAuth()
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState(null)
 
     useEffect(() => {
-        dispatch({ type: 'SET_LOADING' })
         const fetchProduct = async () => {
             try {
                 const { data } = await networkCall(`/products/${id}`, 'GET')
@@ -22,9 +22,12 @@ const ProductDetails = () => {
             }
         };
         fetchProduct()
-        dispatch({ type: 'SET_LOADING' })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
+
+		if(!product){
+			return <Loader/>
+		}
 
     return (
         <div className='product-page'>
