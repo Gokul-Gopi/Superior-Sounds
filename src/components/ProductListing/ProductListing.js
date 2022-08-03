@@ -17,8 +17,8 @@ const ProductListing = () => {
         window.scrollTo(0, 0)
         const fetchProducts = async () => {
             try {
-                const { data } = await networkCall('/products', 'GET');
-                dispatch({ type: 'SET_PRODUCTS', payload: data })
+                const response = await networkCall('/products', 'GET');
+                dispatch({ type: 'SET_PRODUCTS', payload: response?.data })
             } catch (err) {
                 console.log(`Error: ${err.message}`);
             }

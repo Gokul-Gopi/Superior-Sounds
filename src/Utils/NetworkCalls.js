@@ -101,7 +101,6 @@ const modifyCartItemsQty = async (event, type, productID, dispatch) => {
     dispatch({ type: 'SET_LOADING' })
     event.preventDefault()
     const response = await networkCall(`/cart/${productID}`, 'PUT', type)
-    console.log(response)
     dispatch({ type: 'SET_CART', payload: response.data.userCart })
     dispatch({ type: 'SET_LOADING' })
 }

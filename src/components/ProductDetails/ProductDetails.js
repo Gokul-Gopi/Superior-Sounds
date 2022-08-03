@@ -23,12 +23,13 @@ const ProductDetails = () => {
         };
         fetchProduct()
         dispatch({ type: 'SET_LOADING' })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
     return (
         <div className='product-page'>
             <div className='product-page_desc-img'>
-                <div className='product-page-img'><img src={product.image} alt="Product Image" /></div>
+                <div className='product-page-img'><img src={product.image} alt="Product" /></div>
 
                 <div className='product-page-desc'>
                     <h2 className='name'>{product.name}</h2>

@@ -26,7 +26,7 @@ const Header = () => {
     const [toggleHamburgerMenu, setHamburgerMenu] = useState(null)
 
     const checkbox = document.querySelector('.nav-toggle')
-    console.log(checkbox)
+  
     const searchProducts = (searchInput) => {
         if (searchInput.length !== 0) {
             const searchResults = state.allProducts.filter(product => {
