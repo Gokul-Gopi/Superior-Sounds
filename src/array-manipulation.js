@@ -11,7 +11,7 @@ const removeFromCart = (cart, productID) => {
 }
 
 const sortByPrice = (type, products) => {
-    console.log({ type })
+    
     if (type === 'lowToHigh') {
         return products.sort((a, b) => a.price - b.price)
     }
