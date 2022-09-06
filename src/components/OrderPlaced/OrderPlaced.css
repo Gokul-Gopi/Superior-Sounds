@@ -1,0 +1,26 @@
+.order-placed-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.image-container {
+  text-align: center;
+}
+
+.image-container p {
+  font-size: 1.7rem;
+  margin-bottom: 2rem;
+  color: #42b883;
+}
+
+.image-container img {
+  width: 25rem;
+}
+
+@media (max-width: 500px) {
+  .image-container img {
+    width: 80%;
+  }
+}

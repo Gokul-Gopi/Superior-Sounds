@@ -4,15 +4,18 @@ import "../Cart/Cart.css";
 import {
   addToWishlist,
   modifyCartItemsQty,
+  networkCall,
   removeItemFromCart,
 } from "../../Utils/NetworkCalls";
 import { calculatePriceAndSubtotal } from "../../Utils/cart";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { state, dispatch } = useProduct();
   const { authState } = useAuth();
+  const navigate = useNavigate();
   const itemsInWishlist = state.wishlist.map((e) => e._id);
 
   const priceDetails = calculatePriceAndSubtotal(state.cart);
@@ -22,6 +25,21 @@ const Cart = () => {
     if (!itemsInWishlist.includes(productID)) {
       removeItemFromCart(event, productID, dispatch);
     }
+  };
+
+  const placeOrderHandler = async () => {
+    dispatch({ type: "SET_LOADING" });
+
+    try {
+      const response = await networkCall("/order", "POST");
+      if (response?.status === 200) {
+        navigate("/orderPlaced");
+      }
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+
+    dispatch({ type: "SET_LOADING" });
   };
 
   return state.cart.length !== 0 ? (
@@ -34,7 +52,7 @@ const Cart = () => {
               <div className="items-in-cart" key={product._id}>
                 <div className="items-in-cart_product-details">
                   <div className="product-img">
-                    <img src={product.image} alt="product image" />
+                    <img src={product.image} alt="product" />
                   </div>
                   <div className="product-other-details">
                     <h2>{product.name}</h2>
@@ -92,7 +110,7 @@ const Cart = () => {
           })}
         </div>
         <div className="placeorder-btn">
-          <button>Place Order</button>
+          <button onClick={placeOrderHandler}>Place Order</button>
         </div>
       </main>
 
