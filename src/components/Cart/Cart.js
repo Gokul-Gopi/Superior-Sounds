@@ -33,6 +33,7 @@ const Cart = () => {
     try {
       const response = await networkCall("/order", "POST");
       if (response?.status === 200) {
+        dispatch({ type: "SET_CART", payload: [] });
         navigate("/orderPlaced");
       }
     } catch (err) {
